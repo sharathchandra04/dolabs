@@ -1,0 +1,373 @@
+{
+    "description": "In this lab you will learn to create EC2 and security_groups",
+    "descriptionw": [8, 10],
+    "prerequisites": ["None"],
+    "labid": 4,
+    "taskid": 2,
+    "title": "AWS EC2 basics",
+    "total": 5,
+    "subtasks": [
+      {
+        "staskid":1,
+        "title": "create security group instance",
+        "description": "An EC2 instance in AWS is a virtual_server that allows users to run applications and services in the cloud.",
+        "descriptionw": [7],    
+        "specifications": [
+          {"key": "Basic"},
+          {"key": "name", "value": "sgl4-2"},
+          {"key": "description", "value": "*(anything)"},
+          {"key": "Give Inbound Rules"},
+          {"key": "Type", "value": "SSH"},
+          {"key": "Protocol", "value": "TCP"},
+          {"key": "Port", "value": "22"},
+          {"key": "Allow", "value": "IPV4 everywhere (0.0.0.0)"}
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid":2,
+        "title": "create ec2 instance",
+        "description": "An EC2 instance in AWS is a virtual_server that allows users to run applications and services in the cloud.",
+        "descriptionw": [7],    
+        "specifications": [
+          {"key": "Basic"},
+          {"key": "name", "value": "ec2l4-3"},
+          {"key": "AMI", "value": "ubuntu20"},
+          {"key": "InstanceType", "value": "t2.micro"},
+          {"key": "Network Configuration"},
+          {"value": "Leave Default"},
+          {"key": "Storage Configuration"},
+          {"value": "Leave Default"},
+          {"key": "Private Key"},
+          {"value": "use previous key if exists else create new"}
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid":3,
+        "title": "link security group and EC2",
+        "description": "check security group sgl4-2 is linked to EC2 instance ec2l4-3",
+        "descriptionw": [],
+        "specifications": [
+          {"key": "This should be lredy done while creating EC2, please verify if it is linked"}
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 4,
+        "title": "learn about IP addresses of EC2",
+        "description": "answer the questions",
+        "descriptionw": [],
+        "specifications": [
+        ],
+        "test": true,
+        "status": 0,
+        "questions":[
+            {
+                "qid": "4241",
+                "label": "public ip",
+                "q": "what is the public ipv4 of the ec2 instance ec2l4-3 ?",
+                "type": "text"        
+            },
+            {
+                "qid": "4242",
+                "label": "private ip",
+                "q": "what is the private ipv4 of the ec2 instance ec2l4-3 ?",
+                "type": "text"        
+            },
+            {
+                "qid": "4243",
+                "label": "dns address",
+                "q": "what is the dns address of the ec2 instance ec2l4-3 ?",
+                "type": "text"        
+            }
+        ]
+      },
+      {
+        "staskid": 5,
+        "title": "know EBS ?",
+        "description": "learn about EBS associated with EC2, answer the questions",
+        "descriptionw": [],
+        "specifications": [
+        ],
+        "test": true,
+        "status": 0,
+        "questions":[
+            {
+                "qid": "4251",
+                "label": "EBS id",
+                "q": "what is the EBS id of ec2 instance ec2l4-3 ?",
+                "type": "text"        
+            },
+            {
+                "qid": "4252",
+                "label": "memory size",
+                "q": "what is the block storage memory size of ec2l4-3 ?",
+                "type": "text"        
+            }
+        ]
+      },
+      {
+        "staskid": 6,
+        "title": "create EBS",
+        "description": "create a new block storage (basically an virtual SSD disk)",
+        "descriptionw": [],
+        "specifications": [
+            {"key": "Size", "value": "8 Gib"},            
+            {"key":"IOPS", "value": "3000"},
+            {"key":"Throughput", "value": "125"},
+            {"key":"AvailabilityZone", "value": "us-east-1"}
+        ],
+        "test": false,
+        "status": 0
+      },
+      {
+        "staskid": 7,
+        "title": "link EBS to EC2 ",
+        "description": "link newly creted EBS volume to EC2 ec2l4-3",
+        "descriptionw": [],
+        "specifications": [],
+        "questions":[
+            {
+                "qid": "4271",
+                "label": "EBS id",
+                "q": "what is the block storage id ec2 instance ec2l4-3 ?",
+                "type": "text"        
+            }
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 8,
+        "title": "create AMI  & snapshot",
+        "description": "create a AMI and Snapshot of the instance ec2l4-3",
+        "descriptionw": [],
+        "specifications": [
+            {"key": "name", "value": "amil4"},
+            {"key": "Enable No reboot", "value": "No"},
+            {"key": "Tag Image and snapshot together", "value": "Yes"}
+        ],
+        "questions":[
+            {
+                "qid": "4281",
+                "label": "ami id",
+                "q": "what is the ami id created from ec2 instance ec2l4-3 ?",
+                "type": "text"        
+            },
+            {
+                "qid": "4282",
+                "label": "snapshot id",
+                "q": "what is the snapshot id created from volume attched to the ec2 instance ec2l4-3 ?",
+                "type": "text"        
+            }
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 9,
+        "title": "learn Elastic IP",
+        "description": "create Elastic IP address (reserve an IP address for later use)",
+        "descriptionw": [],
+        "specifications": [
+            {"network border group": "us-east-1"}
+        ],
+        "questions":[
+            {
+                "qid": "4291",
+                "label": "elastic ip",
+                "q": "what is the IP address of elastic ip ?",
+                "type": "text"        
+            },
+            {
+                "qid": "4292",
+                "label": "allocation id",
+                "q": "what is the allocation id of the elastic ip created?",
+                "type": "text"        
+            }
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 10,
+        "title": "learn Elastic IP",
+        "description": "create Elastic IP address (reserve an IP address for later use)",
+        "descriptionw": [],
+        "display": "dont",
+        "specifications": [
+            {"network border group": "us-east-1"}
+        ],
+        "questions":[
+            {
+                "qid": "42101",
+                "label": "elastic ip",
+                "q": "what is the IP address of elastic ip ?",
+                "type": "text"        
+            },
+            {
+                "qid": "42102",
+                "label": "allocation id",
+                "q": "what is the allocation id of the elastic ip created?",
+                "type": "text"        
+            }
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 11,
+        "title": "use Elastic IP address",
+        "description": "associate the elastic IP address and to the ec2 instance ec2l4-3",
+        "descriptionw": [],
+        "specifications": [
+            {"resource type": "instance"},
+            {"instance": "ec2l4-3"}
+        ],
+        "questions":[
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 12,
+        "title": "use AMI",
+        "description": "create EC2 using AMI amil4 instance",
+        "descriptionw": [],
+        "specifications": [
+            {"key":"name", "value": "ec2l4-4"},
+            {"key": "ami", "value": "amil4"},
+            {"value": "you should notice that you have created a new volume along with the ec2 ( that volume is created using the snapshot created previously)"}
+        ],
+        "questions":[
+            {
+                "qid": "42123",
+                "label": "volume id",
+                "q": "what is the volume id of the volume of ec2l4-4?",
+                "type": "text"        
+            },
+            {
+                "qid": "42124",
+                "label": "snapshot id",
+                "q": "what is the snapshot id of the volume of ec2l4-4?",
+                "type": "text"        
+            }           
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 13,
+        "title": "create EC2",
+        "description": "create EC2 instance",
+        "descriptionw": [],
+        "specifications": [
+            {"key":"name", "value": "ec2l4-5"},
+            {"key":"ami", "value": "ubuntu"},
+            {"key": "security groups (Inbound Rules)"},
+            {"key":"Type", "value": "SSH"},
+            {"value": "use other specifications of your choice."}
+        ],
+        "questions":[           
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 14,
+        "title": "learn EC2 connect",
+        "description": "connect to the ec2 instance ec2l4-5 using SSHConnect and create a file called test.txt and then write few lines to it",
+        "connect": ["ec2five"],
+        "commands": [
+            {
+                "command": "sudo apt update",
+                "explanation": "update the OS (ubuntu) first"
+            },
+            {
+                "command": "touch test.txt",
+                "explanation": "create a text file"
+            }
+        ],
+        "descriptionw": [],
+        "specifications": [
+            {"key":"ec2 connect user", "value":"ubuntu"}
+        ],
+        "questions":[           
+        ],
+        "test": false,
+        "status": 0
+      },
+      {
+        "staskid": 15,
+        "title": "create snapshot of volume of ec2l4-5",
+        "description": "create EC2 instance",
+        "descriptionw": [],
+        "specifications": [
+        ],
+        "questions":[
+            {
+                "qid": "42151",
+                "label": "ip",
+                "q": "provide snapshot id?",
+                "type": "text"
+            }
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 16,
+        "title": "snapshot to image",
+        "description": "1. create AMI snapshotami from snapshot",
+        "descriptionw": [],
+        "specifications": [
+            {"key":"name", "value": "snapshotami"}
+        ],
+        "questions":[
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 17,
+        "title": "EC2 from image",
+        "description": "1. create EC2 from image snapshotami ",
+        "descriptionw": [],
+        "specifications": [
+            {"key":"name", "value": "ec2l4-6"},
+            {"key":"ami", "value": "snapshotami"},
+            {"key":"Security groups & Inbound Rules"},
+            {"key":"type", "value": "SSH"},
+            {"key":"ami", "value": "snapshotami"}
+        ],
+        "questions":[
+        ],
+        "test": false,
+        "status": 0
+      },
+      {
+        "staskid": 18,
+        "title": "check the volume",
+        "description": "connect to the ec2 instance ec2l4-6 using SSHConnect and and check if data exists",
+        "specifications": [
+            {"key":"ec2 connect user", "value":"ubuntu"}
+        ],
+        "connect": ["ec2l4-6"],
+        "commands": [
+            {
+                "command": "ls",
+                "explanation": "you should see test.txt"
+            }
+        ],
+        "descriptionw": [],
+        "questions":[           
+        ],
+        "test": false,
+        "status": 0
+      }
+    ]
+}

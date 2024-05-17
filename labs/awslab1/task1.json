@@ -1,0 +1,124 @@
+{
+    "description": "In this lab you will learn to create EC2 and security_groups",
+    "descriptionw": [8, 10],
+    "prerequisites": ["None"],
+    "labid": 4,
+    "taskid": 1,
+    "title": "AWS EC2 basics",
+    "total": 5,
+    "subtasks": [
+      {
+        "staskid":1,
+        "title": "create security group instance",
+        "description": "An EC2 instance in AWS is a virtual_server that allows users to run applications and services in the cloud.",
+        "descriptionw": [7],    
+        "specifications": [
+          {"key": "Basic"},
+          {"key": "name", "value": "sgl4"},
+          {"key": "description", "value": "*(anything)"},
+          {"key": "Give Inbound Rules"},
+          {"key": "Type", "value": "SSH"},
+          {"key": "Protocol", "value": "TCP"},
+          {"key": "Port", "value": "22"},
+          {"key": "Allow", "value": "IPV4 everywhere (0.0.0.0)"}
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid":2,
+        "title": "create ec2 instance",
+        "description": "An EC2 instance in AWS is a virtual_server that allows users to run applications and services in the cloud.",
+        "descriptionw": [7],    
+        "specifications": [
+          {"key": "Basic"},
+          {"key": "name", "value": "ec2l4-1"},
+          {"key": "AMI", "value": "ubuntu20"},
+          {"key": "InstanceType", "value": "t2.micro"},
+          {"key": "Network Configuration"},
+          {"value": "Leave Default"},
+          {"key": "Storage Configuration"},
+          {"value": "Leave Default"},
+          {"key": "Private Key"},
+          {"value": "create a new private key called sgl4 and download it (.pem)"},
+          {"key": "SecurityRules"},
+          {"key": "security group", "value": "sgl4"},
+          {"key": "Type", "value": "SSH"},
+          {"key": "Port", "value": "22"},
+          {"key": "Allow", "value": "IPV4 everywhere (0.0.0.0)"}
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid":3,
+        "title": "link security group and EC2",
+        "description": "check security group sgl4 is linked to EC2 instance ec2l4-1",
+        "descriptionw": [],
+        "specifications": [
+          {"key": "This should be lredy done while creatinf EC2, please verify if it is linked"}
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid":4,
+        "title": "create another ec2 instance",
+        "description": "create another ec2",
+        "descriptionw": [],
+        "specifications": [
+          {"key": "Basic"},
+          {"key": "name", "value": "ec2l4-2"},
+          {"key": "AMI", "value": "ubuntu20"},
+          {"key": "InstanceType", "value": "t2.micro"},
+          {"key": "Network Configuration"},
+          {"value": "Leave Default"},
+          {"key": "Storage Configuration"},
+          {"value": "Leave Default"},
+          {"key": "Private Key"},
+          {"value": "sgl4(created previously)"},
+          {"key": "SecurityRules"},
+          {"key": "security group", "value": "sgl4"},
+          {"key": "Type", "value": "SSH"},
+          {"key": "Port", "value": "22"},
+          {"key": "Allow", "value": "IPV4 everywhere (0.0.0.0)"}
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 5,
+        "title": "terminate instnce",
+        "description": "terminate ec2 instance ec2l4-2",
+        "descriptionw": [],
+        "specifications": [
+        ],
+        "test": true,
+        "status": 0
+      },
+      {
+        "staskid": 6,
+        "title": "reboot instance",
+        "description": "reboot ec2 instance ec2l4-1",
+        "descriptionw": [],
+        "specifications": [
+        ],
+        "test": false,
+        "status": 0
+      }
+    ],
+    "questions":[
+      {
+        "q": "what is the public ipv4 of the ec2 instance ec2l4-1 ?",
+        "type": "text"
+      },
+      {
+        "q": "what is the private ipv4 of the ec2 instance ec2l4-1 ?",
+        "type": "text"
+      },
+      {
+        "q": "what is the public dns address of the ec2 instance ec2l4-1 ?",
+        "type": "text"
+      }
+    ]
+  }

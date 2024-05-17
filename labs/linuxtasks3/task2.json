@@ -1,0 +1,287 @@
+{
+	"title": "Linux Lab 3 Task 2",
+	"description": "In this lab, you will learn about Process_Management commands",
+	"descriptionw": [7, 10],
+	"prerequisites": [],
+	"url": "/task/2",
+	"taskid": 2,
+	"labid": 3,
+	"subtasks": [
+        {
+          "staskid": 1,
+          "title": "install nginx",
+          "tasks": [
+            {
+              "task": "install nginx using apt and check the browser http://localhost:80",
+              "taskw": [8]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Use descriptive keywords to narrow down your search for specific packages.",
+          "commands": [
+            { "explanation": "goto Lab Directory Lab3Task2" },
+            {
+              "command": "apt install nginx",
+              "explanation": "This command installs latest nginx."
+            }
+          ],
+          "test": true
+        },
+        {
+          "staskid": 2,
+          "title": "play with nginx using systemctl",
+          "tasks": [
+            {
+              "task": "you need sudo access to use systemctl",
+              "taskw": [2, 6]
+            },
+            {
+              "task": "check service status, Usage: sudo_systemctl_status_[service_name]",
+              "taskw": [2]
+            },
+            {
+              "task": "stop service, Usage: sudo_systemctl_stop_[service_name]",
+              "taskw": [0]
+            },
+            {
+              "task": "start service again, Usage: sudo_systemctl_start_[service_name]",
+              "taskw": [0]
+            },
+            {
+              "task": "restart service, Usage: sudo_systemctl_restart_[service_name]",
+              "taskw": [0]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "",
+          "commands": [
+            {
+              "command": "sudo systemctl status nginx",
+              "explanation": "This command checks the status of nginx service"
+            },
+            {
+              "command": "sudo systemctl stop nginx",
+              "explanation": "stop of nginx service"
+            },
+            {
+              "command": "sudo systemctl start nginx",
+              "explanation": "start the nginx service"
+            },
+            {
+              "command": "sudo systemctl restart nginx",
+              "explanation": "stops and starts nginx service"
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 3,
+          "title": "Enable Automatic Start on Boot",
+          "tasks": [
+            {
+              "task": "Configure a service to start automatically on system boot.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: sudo systemctl enable [service_name]",
+              "taskw": []
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "After enabling a service, use systemctl is-enabled [service_name] to verify its status.",
+          "commands": [
+            {
+              "command": "sudo systemctl enable nginx",
+              "explanation": "enables nginx."
+            },
+            {
+              "command": "sudo systemctl is-enabled nginx",
+              "explanation": "check if nginx is enabled"
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 4,
+          "title": "view unit services",
+          "tasks": [
+            {
+              "task": "list all unit_services using systemctl.",
+              "taskw": [2]
+            },
+            {
+              "task": "filter out nginx service using grep",
+              "taskw": [2]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "",
+          "commands": [
+            {
+              "command": "systemctl list-unit-files --type=service",
+              "explanation": "This command provides information about all processes running on the system, including their IDs, resource usage, and execution status."
+            },
+            {
+              "command": "systemctl list-unit-files --type=service | grep nginx",
+              "explanation": "filter nginx"
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 5,
+          "title": "List Running Processes with ps",
+          "tasks": [
+            {
+              "task": "Display a list of currently running processes.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: ps_aux , ps --help",
+              "taskw": [0, 2]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Use ps aux | grep [process_name] to filter processes by name.",
+          "commands": [
+            {
+              "command": "ps aux",
+              "explanation": "list of all processes running, analyze PPID and PID"
+            },
+            {
+              "command": "ps aux | grep nginx",
+              "explanation": "analyze output"
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 6,
+          "title": "Display Process Tree with ps",
+          "tasks": [
+            {
+              "task": "View a hierarchical tree of processes.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: ps_axjf",
+              "taskw": [0]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "The process tree shows parent-child relationships among processes.",
+          "commands": [
+            {
+              "command": "ps axjf",
+              "explanation": "list processes in a tree-like structure of processes. parent process child process"
+            },
+            {
+              "command": "ps axjf | grep nginx",
+              "explanation": "nginx process tree"
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 7,
+          "title": "Show Detailed Process Information with ps",
+          "tasks": [
+            {
+              "task": "Retrieve detailed information about a nginx process. first get PID of nginx and then fetch details",
+              "taskw": []
+            },
+            {
+              "task": "Usage: ps_-p_[PID]_-o_user,pid,ppid,%cpu,%mem,cmd",
+              "taskw": [0]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "",
+          "commands": [
+            {
+              "command": "ps aux | grep '[n]ginx' | awk '{print $2}' | head -n 1",
+              "explanation": "get pid of nginx master process"
+            },
+            {
+              "command": "ps -p nginx_pid -o user,pid,ppid,%cpu,%mem,cmd",
+              "explanation": "This command displays detailed information about the nginx process, including its user, parent process ID, CPU and memory usage, and command."
+            },
+            {
+              "command": "ps -p $(ps aux | grep '[n]ginx' | awk '{print $2}' | head -n 1) -o user,pid,ppid,%cpu,%mem,cmd",
+              "explanation": "combine both commands"
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 8,
+          "title": "View System Logs with journalctl",
+          "tasks": [
+            {
+              "task": "Display system logs using journalctl.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: journalctl",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Use journalctl -b to show logs from the current boot session.",
+          "commands": [
+            {
+              "command": "journalctl",
+              "explanation": "This command shows system logs, including boot messages, service status changes, and error messages."
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 9,
+          "title": "Filter Logs by Unit with journalctl",
+          "tasks": [
+            {
+              "task": "Filter logs by a specific unit or service.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: journalctl_-u_[unit_name]",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Replace [unit_name] with",
+          "commands": [
+            {
+              "command": "systemctl list-unit-files --type=service",
+              "explanation": "list unit services"
+            },
+            {
+              "command": "journalctl -u nginx",
+              "explanation": "display logs of nginx"
+            }
+          ],
+          "test": false
+        }
+    ]
+}
+  
+

@@ -1,0 +1,256 @@
+{
+	"title": "Linux Lab 2 Task 2 (File & User Management)",
+	"description": "In this lab, you will learn about file_management commands and User_mangement commands",
+	"descriptionw": [7, 10],
+	"prerequisites": [],
+	"url": "/task/2",
+	"taskid": 2,
+	"labid": 2,
+	"subtasks": [
+        {
+            "staskid": 1,
+            "title": "Start Lab",
+            "tasks": [
+              {
+                "task": "go into Lab folder",
+                "taskw": []
+              }
+            ],
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+              { "explanation": "goto Lab Directory Lab2Task2" },
+              { "command": "cd LabTtask2", "explanation": "" }
+            ],
+            "test": false
+          },
+          {
+            "staskid": 2,
+            "title": "Learn file types",
+            "tasks": [
+              {
+                "task": "Identify different types of files in Linux.",
+                "taskw": []
+              },
+              {
+                "task": "Usage: file_<file_path>",
+                "taskw": [1]
+              }
+            ],
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+              {
+                "command": "file ./filetypes_folder/*",
+                "explanation": "Display the type of files in filetypes_folder"
+              },
+              {
+                "command": "file /dev/sd*",
+                "explanation": "Display the type of files in /dev that starts with sd*, (view storage files)"
+              }
+            ],
+            "test": false
+          },
+          {
+            "staskid": 3,
+            "title": "Learn symbolic links",
+            "tasks": [
+              {
+                "task": "Understand and create symbolic links in Linux.",
+                "taskw": []
+              },
+              {
+                "task": "symbolic links in Linux are like shortcuts in a windows OS",
+                "taskw": [6]
+              },
+              {
+                "task": "Usage: ln_-s_<target_file>_<link_name>",
+                "taskw": [1]
+              }
+            ],
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+              {
+                "explanation": "everything(even folders) is a file in linux"
+              },
+              {
+                "command": "cd filetypes_folder && cd task3dir && ls",
+                "explanation": "analyse task3dir and come back to task folder Lab2task2"
+              },
+              {
+                "command": "ln -s ./filetypes_folder/task3dir link_to_task3dir_in_filetypes",
+                "explanation": "Create a symbolic link called link_to_task3dir_in_filetypes to task3dir present in filetypes_folder in the current directory"
+              },
+              {
+                "command": "ls -l",
+                "explanation": "view simlink you created"
+              },
+              {
+                "command": "cd link_to_task3dir_in_filetypes && ls",
+                "explanation": "view simlink you created and back to task folder"
+              }
+            ],
+            "test": true
+          },
+          {
+            "staskid": 4,
+            "title": "Learn find command",
+            "tasks": [
+              {
+                "task": "Use the `find` command to search for files and directories.",
+                "taskw": []
+              },
+              {
+                "task": "find locations of python3 installed using snap",
+                "taskw": [3, 6]
+              },
+              {
+                "task": "find locations of files that starts with task* in the folder ./Lab2task1 and redirect the result to ./sols/task4.txt",
+                "taskw": [7, 11]
+              },
+              {
+                "task": "Usage: find_<directory_path>_-name_<filename>",
+                "taskw": [1]
+              }
+            ],
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+              {
+                "command": "sudo find /snap -name python3",
+                "explanation": "Search for a file name called python3 inside /snap directory, verify by navigating to output"
+              },
+              {
+                "command": "sudo find ./ -name \"task*\" > ./sols/task4.txt",
+                "explanation": "in the current folder seach for files that stats with task recursively"
+              }
+            ],
+            "test": true
+          },
+          {
+            "staskid": 5,
+            "title": "Learn hostname and whoami commands",
+            "tasks": [
+              {
+                "task": "Display the hostname of the current machine",
+                "taskw": []
+              },
+              {
+                "task": "Usage: hostname",
+                "taskw": []
+              }
+            ],
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+              {
+                "command": "hostname",
+                "explanation": "Display the hostname of the machine."
+              },
+              {
+                "command": "whoami",
+                "explanation": "current username"
+              }
+            ],
+            "test": false
+          },
+          {
+            "staskid": 6,
+            "title": "Explore user-related files",
+            "tasks": [
+              {
+                "task": "Understand files related to users, such as `/etc/passwd` and `/etc/shadow`.",
+                "taskw": [7, 9]
+              },
+              {
+                "task": "Display user account information.",
+                "taskw": []
+              },
+              {
+                "task": "Display password information (requires root access).",
+                "taskw": []
+              }
+            ],
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+              {
+                "command": "cat /etc/passwd",
+                "explanation": "View user account information."
+              },
+              {
+                "command": "cat /etc/shadow",
+                "explanation": "View password information (requires root access)."
+              }
+            ],
+            "test": false
+          },
+          {
+            "staskid": 7,
+            "title": "Create a new user",
+            "tasks": [
+              {
+                "task": "create a new user account with a username mike and password 15081974@1234.",
+                "taskw": [8, 11]
+              },
+              {
+                "task": "Usage: sudo_adduser_<username>",
+                "taskw": []
+              }
+            ],
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+              {
+                "command": "cd /home",
+                "explanation": "/home directory has a directory for every user in ubuntu. for now you will see only one user called ubuntu"
+              },
+              {
+                "command": "sudo adduser mike",
+                "explanation": "Create a new user account called mike"
+              }
+            ],
+            "test": true
+          },
+          {
+            "staskid": 8,
+            "title": "Check home directory",
+            "tasks": [
+              {
+                "task": "Check the contents of the `/home` directory.",
+                "taskw": [5]
+              },
+              {
+                "task": "Usage: ls_/home",
+                "taskw": [1]
+              }
+            ],
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+              {
+                "command": "ls /home",
+                "explanation": "now you should see mike and ubuntu both directories each for users mike and ubuntu"
+              }
+            ],
+            "test": true
+          }
+    ]
+}

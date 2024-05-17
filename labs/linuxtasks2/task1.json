@@ -1,0 +1,144 @@
+{
+	"title": "Linux Lab 2 Task 1 (File Management)",
+	"description": "In this lab, you will learn about file_management commands in Linux, such as cp, mv, rm, ls, and their options.",
+	"descriptionw": [7],
+	"prerequisites": ["cd", "mkdir", "ls", "touch", "history"],
+	"url": "/task/2",
+	"taskid": 1,
+	"labid": 2,
+	"subtasks": [
+	  {
+		"staskid": 1,
+		"title": "get into lab directory",
+		"tasks": [
+		  {
+			"task": "go into Lab directory Lab2Task1 and analyze",
+			"taskw": [4]
+		  }
+		],
+		"answer": "cd Lab2Task1 && ls",
+		"status": 0,
+		"info": "",
+		"hint": "",
+		"commands": [
+		  { "explanation": "goto Lab Directory Lab2Task1" },
+		  { "command": "cd Lab2Task1 && ls", "explanation": "" }
+		],
+		"test": false
+	  },
+	  {
+		"staskid": 2,
+		"title": "Learn cp",
+		"tasks": [
+		  {
+			"task": "Copy a file named cpfile.txt and cpdir from the current directory to the directory sols",
+			"taskw": [4, 6]
+		  },
+		  {
+			"task": "Usage: cp_<source>_<destination>",
+			"taskw": [1]
+		  }
+		],
+		"answer": "cp cpfile.txt ./sols",
+		"status": 0,
+		"info": "",
+		"hint": "",
+		"commands": [
+		  { "command": "cp cpfile.txt ./sols", "explanation": "Copy cpfile.txt to sols directory" },
+		  { "command": "cp -r cpdir ./sols", "explanation": "Copy cpdir to sols directory" }
+		],
+		"test": true
+	  },
+	  {
+		"staskid": 3,
+		"title": "Learn mv",
+		"tasks": [
+		  {
+			"task": "Move a file named mvfile.txt from the current directory to the directory sols.",
+			"taskw": [4, 12]
+		  },
+		  {
+			"task": "Usage: mv_<source>_<destination>",
+			"taskw": [1]
+		  }
+		],
+		"answer": "mv mvfile.txt ./sols",
+		"status": 0,
+		"info": "",
+		"hint": "",
+		"commands": [
+		  { "command": "mv mvfile.txt ./sols", "explanation": "Move mvfile.txt to sols directory" }
+		],
+		"test": true
+	  },
+	  {
+		"staskid": 4,
+		"title": "Learn rm",
+		"tasks": [
+		  {
+			"task": "Remove a file named rmfile.txt from the current directory.",
+			"taskw": [4]
+		  },
+		  {
+			"task": "Usage: rm_<file-path>",
+			"taskw": [1]
+		  }
+		],
+		"answer": "rm rmfile.txt",
+		"status": 0,
+		"info": "",
+		"hint": "",
+		"commands": [
+		  { "command": "rm rmfile.txt", "explanation": "Remove rmfile.txt" }
+		],
+		"test": true
+	  },
+	  {
+		"staskid": 5,
+		"title": "Learn rm -rf",
+		"tasks": [
+		  {
+			"task": "Remove a directory named rmdir and all its contents.",
+			"taskw": [4]
+		  },
+		  {
+			"task": "Usage: rm_-rf_<directory>",
+			"taskw": [1]
+		  }
+		],
+		"answer": "rm -rf rmdir",
+		"status": 0,
+		"info": "",
+		"hint": "",
+		"commands": [
+		  { "command": "rm -rf rmdir", "explanation": "Remove rmdir directory and its contents recursively" }
+		],
+		"test": true
+	  },
+	  {
+		"staskid": 6,
+		"title": "Learn ls -options",
+		"tasks": [
+		  {
+			"task": "List all files and directories in the current directory with detailed information, including hidden files and redirect the output to the ./sols/task6.txt",
+			"taskw": [21]
+		  },
+		  {
+			"task": "Usage: ls_-options",
+			"taskw": [1]
+		  }
+		],
+		"answer": "ls -la",
+		"status": 0,
+		"info": "",
+		"hint": "",
+		"commands": [
+		  { "command": "ls -la > ./sols/task6.txt", "explanation": "List all files and directories with detailed information" },
+		  { "explanation": "-l longlisting format, -a means all (including hidden files and directories)" },
+		  { "command": "ls -la ~", "explanation": "List all files and directories in home directory" },
+		  { "command": "ls --help", "explanation": "ls help" }
+		],
+		"test": true
+	  }
+	]
+  }

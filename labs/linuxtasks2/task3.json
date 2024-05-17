@@ -1,0 +1,246 @@
+{
+	"title": "Linux Lab 2 Task 3 ( User Management)",
+	"description": "In this lab, you will learn about User_mangement commands",
+	"descriptionw": [7, 10],
+	"prerequisites": [],
+	"url": "/task/2",
+	"taskid": 3,
+	"labid": 2,
+	"subtasks": [
+        {
+          "staskid": 1,
+          "title": "Explore User Information",
+          "tasks": [
+            {
+              "task": "Execute the `id` command to display the user and group IDs along with additional information.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: id",
+              "taskw": []
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "To explore more, try adding the `-a` option to `id` for additional details.",
+          "commands": [
+            { "explanation": "goto Lab Directory Lab2Task3" },
+            {
+              "command": "id",
+              "explanation": "This command displays information about the current user, including user ID (UID), group ID (GID), and supplementary group IDs."
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 2,
+          "title": "Display Current User",
+          "tasks": [
+            {
+              "task": "Utilize the `whoami` command to reveal the current username logged into the system.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: whoami",
+              "taskw": []
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Try combining `whoami` with `echo` to create personalized greetings!",
+          "commands": [
+            {
+              "command": "whoami",
+              "explanation": "This command prints the username of the currently logged-in user."
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 3,
+          "title": "Show Hostname",
+          "tasks": [
+            {
+              "task": "Employ the `hostname` command to exhibit the hostname of the current machine.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: hostname",
+              "taskw": []
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "You can modify the system hostname using `sudo hostname [new_hostname]`.",
+          "commands": [
+            {
+              "command": "hostname",
+              "explanation": "This command displays the hostname of the machine, which is used to identify it on a network."
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 4,
+          "title": "View Users and Groups",
+          "tasks": [
+            {
+              "task": "Execute the `users` command to list currently logged-in users.",
+              "taskw": []
+            },
+            {
+              "task": "Execute the `groups` command to list groups associated with the current user.",
+              "taskw": []
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Use `groups [username]` to list groups for a specific user.",
+          "commands": [
+            {
+              "command": "users",
+              "explanation": "This command lists the usernames of users currently logged into the system."
+            },
+            {
+              "command": "groups",
+              "explanation": "This command lists the groups that the current user belongs to."
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 5,
+          "title": "Switch User",
+          "tasks": [
+            {
+              "task": "Practice switching between users using the su (switch user) command.",
+              "taskw": [6]
+            },
+            {
+              "task": "Usage: su_[username]",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "",
+          "commands": [
+            {
+              "explanation": "check if user mike exists using 'id mike', if doesn't exist creaye using 'sudo useradd mike'"
+            },
+            {
+              "command": "su mike",
+              "explanation": "switch to user mike"
+            },
+            {
+              "command": "su ubuntu",
+              "explanation": "switch to ubuntu"
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 6,
+          "title": "Grant Sudo Access to user mike",
+          "tasks": [
+            {
+              "task": "Add a user to the sudo group to grant them administrative privileges.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: sudo usermod -aG sudo [username]",
+              "taskw": []
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Remember to use `sudo` before running this command to grant administrative permissions.",
+          "commands": [
+            {
+              "command": "su mike && sudo apt update",
+              "explanation": "switch to mike and test if sudo works"
+            },
+            {
+              "explanation": "switch to user ubuntu"
+            },
+            {
+              "command": "sudo usermod -aG sudo mike",
+              "explanation": "add user mike to the sudo group, now user mike can use sudo with his commands."
+            },
+            {
+              "explanation": "switch to user mike"
+            },
+            {
+              "command": "sudo apt update",
+              "explanation": "switch to mike and test if sudo works"
+            }
+          ],
+          "test": true
+        },
+        {
+          "staskid": 7,
+          "title": "Inspect File Permissions",
+          "tasks": [
+            {
+              "task": "Use the `ls` command with the `-l` option to view detailed file permissions.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: ls -l [file_path]",
+              "taskw": []
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Remember, the permissions are displayed in the first column of the `ls -l` output.",
+          "commands": [
+            {
+              "command": "ls -l",
+              "explanation": "ask chatgpt the explanation of output and analyze"
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 8,
+          "title": "Modify File Permissions",
+          "tasks": [
+            {
+              "task": "Utilize the `chmod` command to change file permissions. 4_means_read , 2_means_write , 1_means_execute",
+              "taskw": [2, 8, 10, 12]
+            },
+            {
+              "task": "Usage: chmod_[permissions]_[file_path]",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Permissions can be represented numerically or symbolically in the chmod command.",
+          "commands": [
+            {
+              "command": "chmod 700 file1.txt",
+              "explanation": "give rwx permission to (user) and --- to (group, others) on file file1.txt"
+            },
+            {
+              "command": "chmod 400 file2.txt",
+              "explanation": "give r-- permission to (user) and --- to (group, others) on file file2.txt"
+            },
+            {
+              "command": "chmod 444 file3.txt",
+              "explanation": "give r-- permission everyone (user, group, others) on file file3.txt"
+            }
+          ],
+          "test": true
+        }
+      ]
+      
+}

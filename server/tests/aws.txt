@@ -1,0 +1,94 @@
+Launch an EC2 Instance
+Set Up Security Groups
+Create an S3 Bucket
+Configure IAM Roles and Policies
+Implement Auto Scaling
+Create a Load Balancer
+Implement Monitoring and Logging
+Enable VPC Flow Logs
+Implement Lambda Functions
+Set Up a Simple Notification Service (SNS) Topic
+
+RDS
+S3
+VPC
+LoadBalancing
+AutoScaling
+IAM roles & Policies
+Lambda ---> 3 triggers (S3)
+EventBridge(Cludwatch)
+SNS
+
+
+Implement Route 53
+Use AWS Lambda with API Gateway
+Implement DynamoDB
+Implement AWS RDS
+Use AWS CloudFormation
+Implement AWS ECS
+Use AWS SNS for Cross-Account Notifications
+Set Up AWS CloudWatch Events
+Implement AWS Secrets Manager
+Implement AWS KMS
+
+Implement AWS Elastic Beanstalk
+Use AWS CloudTrail for Auditing
+Implement AWS WAF and AWS Shield
+Implement AWS Elastic File System (EFS)
+Implement AWS CodeDeploy
+Implement AWS Organizations
+Use AWS Config for Compliance Monitoring
+Implement AWS CloudFormation Drift Detection
+Use AWS DataSync for Data Transfer
+Implement AWS Directory Service
+
+Set Up Source Control
+Configure Build Stage
+Implement Automated Testing
+Set Up Artifact Repository
+Implement Deployment Stages
+Configure Environment Provisioning
+Implement Approval Gates
+Implement Monitoring and Logging
+Implement Automated Rollbacks
+Implement Blue-Green Deployments
+Implement Canary Deployments
+Implement Infrastructure Testing
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

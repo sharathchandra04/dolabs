@@ -1,0 +1,176 @@
+{
+	"title": "Linux Lab 1 (navigation)",
+	"description": "In this lab you will learn to creae and delte directories and files in ubuntu You will also learn about navigation through file system.",
+	"descriptionw": [],
+	"prerequisites": [],
+	"url": "/task/1",
+	"taskid": 1,
+	"labid": 1,
+	"subtasks": [
+        {
+            "staskid": 1,
+            "tasks": [
+                {
+                    "task": "view current directory, /home/ubuntu is your home directory. you will learn about home directory in future ",
+                    "taskw": [3]
+                }
+            ],
+            "title":"1. pwd (Present woking Directory)",
+            "answer": "pwd",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+                { "command": "pwd","explanation": "Print current directory, you should be home directory" }
+            ],
+            "test": false
+        },
+        {
+            "staskid": 2,
+            "tasks": [
+                {
+                    "task": "list files and directories in current directory",
+                    "taskw": []
+                }
+            ],
+            "title":"2. ls",
+            "answer": "ls",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+                { "command": "ls","explanation": "you should see empty list" }
+            ],
+            "test": false
+        },
+        {
+            "staskid": 3,
+            "tasks": [
+                {
+                    "task": "create a directory(folder) named dirone using mkdir",
+                    "taskw": [4, 6]
+                }
+            ],
+            "title":"3. mkdir",
+            "answer": "ls",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+                { "command": "mkdir dirone", "explanation": "create a directory called dirone" }
+            ],
+            "test": true
+        },
+        {
+            "staskid": 4,
+            "tasks": [
+                {
+                    "task": "list files and directories in current directory",
+                    "taskw": []
+                }
+            ],
+            "title":"4. ls again",
+            "answer": "ls",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+                { "command": "ls","explanation": "now you should see dirone folder you created in the previous step" }
+            ],
+            "test": false
+        },
+        {
+            "staskid": 5,
+            "tasks": [
+                {
+                    "task": "go into dirone and list files and comeout of dirone",
+                    "taskw": []
+                }
+            ],
+            "title":"5. learn navigation",
+            "answer": "cd \n cd .. \n",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+                { "command": "cd dirone","explanation": "go into dirone folder" },
+                { "command": "ls","explanation": "list files, this time you have some files directories" },
+                { "command": "pwd","explanation": "check location, inside dirone" },
+                { "command": "cd ..","explanation": "come out of dirone folder" },
+                { "command": "pwd","explanation": "check location, outside dirone" }
+            ],
+            "test": false
+        },
+        {
+            "staskid": 6,
+            "tasks": [
+                {
+                    "task": "create another two directories dirtwo, dirthree",
+                    "taskw": [4,5]
+                }
+            ],
+            "title":"6. learn mkdir",
+            "answer": "mkdir dirtwo \n mkdir dirthree \n",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+                { "command": "mkdir dirtwo", "explanation": "create a directory called dirtwo" },
+                { "command": "mkdir dirthree", "explanation": "create a directory called dirthree" },
+                { "command": "ls","explanation": "you will see dirone, dirtwo, dirthree" }
+            ],
+            "test": false
+        },
+        {
+            "staskid": 7,
+            "tasks": [
+                {
+                    "task": "create a new file using touch command in each directory" ,
+                    "taskw": [5]
+                },
+                {
+                    "task": "one.txt in dirone" ,
+                    "taskw": [0, 2]
+                },
+                {
+                    "task": "two.txt in dirtwo" ,
+                    "taskw": [0, 2]
+                },
+                {
+                    "task": "three.txt in dirthree" ,
+                    "taskw": [0, 2]
+                }
+            ],
+            "title":"create files inside directories",
+            "answer": "mkdir ",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+                { "command": "cd dirone", "explanation": "go into dirone" },
+                { "command": "touch one.txt", "explanation": "create text file called one.txt" },
+                { "command": "cd ..", "explanation": "go into dirone" },
+                { "explanation": "create two.txt & three.txt in similar way" }
+            ],
+            "test": true
+        },
+        {
+            "staskid": 8,
+            "tasks": [
+                {
+                    "task": "get history of the commands you typed so far" ,
+                    "taskw": [1]
+                }
+            ],
+            "title":"8. learn History",
+            "answer": "history",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+                { "command": "history", "explanation": "outputs a list of commands typed so far" }
+            ],
+            "test": false
+        }		
+	]
+}

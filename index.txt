@@ -1,0 +1,145 @@
+Task 1: Introduction to Linux Commands
+Description: In this task, you will learn about essential Linux commands related to Navigation such as cd, ls, and mkdir.
+Prerequisites: None
+Subtasks:
+Navigate to the root directory of your system using the cd command.
+List the contents of the root directory using the ls command.
+Create a new directory named ubuntu_files using the mkdir command.
+Enter the newly created directory using the cd command.
+List the contents of the current directory using the ls command.
+Task 2: Exploring Ubuntu File Structure
+Description: In this task, you will explore the Ubuntu file structure and learn about different directories.
+Prerequisites: None
+Subtasks:
+Navigate to the /etc directory using the cd command.
+List the contents of the /etc directory using the ls command.
+Explore the contents of the /etc directory and identify the purpose of some common configuration files.
+Navigate back to the root directory using the cd command.
+Enter the /var directory using the cd command.
+List the contents of the /var directory using the ls command.
+Task 3: Creating and Managing Directories
+Description: In this task, you will practice creating and managing directories in Ubuntu.
+Prerequisites: None
+Subtasks:
+Create a new directory named documents in the root directory using the mkdir command.
+Enter the documents directory using the cd command.
+Create three subdirectories named work, personal, and projects using the mkdir command.
+List the contents of the documents directory to verify the creation of subdirectories.
+Navigate to the work directory using the cd command.
+Create a new text file named work_notes.txt using a text editor like nano or vim.
+
+
+----------------------------------------lab1
+mkdir
+cd 
+ls
+pwd
+touch 
+history 
+sudo 
+sudo su
+----------------------------------------lab2
+piping
+cat
+grep
+less
+head
+tail
+sed
+piping
+I/O redirection >, >>
+awk
+
+----------------------------------------lab3
+vi editor
+----------------------------------------lab4(lab2 task1)
+cd /
+cd ~
+task about differenece between home and root
+absolute path
+relative path
+cp
+mv
+rm
+rm -rf
+ls -options
+
+---------------------------------------lab5 (lab2 task2)
+type of files
+symlinks
+find
+current machine
+current user ---> users file, users password file
+create user along with password
+check /home
+
+---------------------------------------lab6 (lab2 task3)
+id
+whoami
+hostname
+users, group
+switch users
+add user to sudo group 
+view file permissions
+change permissions
+
+---------------------------------------lab6 (lab3 task1)
+apt
+curl 
+wget
+
+---------------------------------------lab7 (lab3 task2)
+ssh
+scp
+
+---------------------------------------lab8 (lab3 task3)
+systemctl
+ps 
+journalctl
+kill 
+cron
+
+Fullstack Basics (lab for all these)
+------------------------------------
+python app, virtualenv, pip 
+nodejs, nvm, pm2
+react, webpack
+grpc
+http --> REST framework
+
+
+
+13teen linux labs
+24/3 = 8
+each lab 8 tasks(each task 3 subtasks)
+3 labs means ---> 3 sessions
+
+
+
+
+Lab1Task2
+    content.txt
+    replace.txt
+    awkcontent.csv
+    /sols
+
+Lab2Task1
+    cpfile.txt
+    cpdir
+    mvfile.txt
+    rmfile.txt
+
+    /sols
+
+Lab2Task2
+    /filetypes_folder
+        /task3dir
+            task31.txt
+            task32.txt
+
+    /sols
+    /tasks
+        task1.txt
+        task2.txt
+        task3.txt
+        task4.txt

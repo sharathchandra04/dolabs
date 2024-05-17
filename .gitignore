@@ -1,0 +1,4 @@
+client/node_modules
+server/data.csv
+venv
+server/tests/botoscripts.py

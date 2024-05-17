@@ -1,0 +1,223 @@
+{
+	"title": "Linux Lab 3 Task 1",
+	"description": "In this lab, you will learn about HTTP REST commands",
+	"descriptionw": [7, 10],
+	"prerequisites": [],
+	"url": "/task/2",
+	"taskid": 1,
+	"labid": 3,
+	"subtasks": [
+        {
+          "staskid": 1,
+          "title": "Update Package Lists",
+          "tasks": [
+            {
+              "task": "Update package lists to ensure you have the latest information on available packages.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: sudo_apt_update",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "To ensure your system is up-to-date, always run this command before installing new packages.",
+          "commands": [
+            { "explanation": "goto Lab Directory Lab3Task1" },
+            {
+              "command": "sudo apt update",
+              "explanation": "This command refreshes the package index from repositories and ensures you have the latest information on available packages."
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 2,
+          "title": "Upgrade Installed Packages",
+          "tasks": [
+            {
+              "task": "Upgrade installed packages to their latest versions.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: sudo_apt_upgrade",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Regularly updating installed packages helps keep your system secure and up-to-date.",
+          "commands": [
+            {
+              "command": "sudo apt upgrade",
+              "explanation": "This command upgrades all installed packages to their latest available versions, ensuring system stability and security."
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 3,
+          "title": "Search for a Specific Package",
+          "tasks": [
+            {
+              "task": "Search for a specific package in the repositories.",
+              "taskw": []
+            },
+            {
+              "task": "store the output in a file called ./sols/Lab3Task3/task3.txt",
+              "taskw": [7]
+            },
+            {
+              "task": "Usage: apt_search_[package_name]",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Use descriptive keywords to narrow down your search for specific packages.",
+          "commands": [
+            {
+              "command": "apt search nginx",
+              "explanation": "This command searches the package index for the specified package nginx and displays relevant matches, allowing you to find and install the desired package."
+            },
+            {
+              "command": "apt search nginx > ./sols/task3.txt",
+              "explanation": "This command searches the package index for the specified package nginx and displays relevant matches, allowing you to find and install the desired package."
+            }
+          ],
+          "test": true
+        },
+        {
+          "staskid": 4,
+          "title": "install nginx server using apt",
+          "tasks": [
+            {
+              "task": "install nginx using apt and check the browser http://localhost:80",
+              "taskw": [8]
+            },
+            {
+              "task": "Usage: apt_install_[package_name]",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Use descriptive keywords to narrow down your search for specific packages.",
+          "commands": [
+            {
+              "command": "apt install nginx",
+              "explanation": "This command installs latest nginx."
+            }
+          ],
+          "test": true
+        },
+        {
+          "staskid": 5,
+          "title": "Download a File with wget",
+          "tasks": [
+            {
+              "task": "Download a file from a URL and move it to it sols folder",
+              "taskw": []
+            },
+            {
+              "task": "Usage: wget_[URL]",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Provide the direct URL of the file you want to download.",
+          "commands": [
+            {
+              "command": "wget https://raw.githubusercontent.com/tensorflow/tensorflow/master/README.md",
+              "explanation": "This command downloads the tensorflow public README.md file. use mv command to move it to sols"
+            }
+          ],
+          "test": true
+        },
+        {
+          "staskid": 6,
+          "title": "Download a File with curl",
+          "tasks": [
+            {
+              "task": "Download a file from a URL and save it locally.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: curl_-o_[output_file]_[URL]",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Specify the desired output file name when using this command.",
+          "commands": [
+            {
+              "command": "curl -o tensorflow.md https://raw.githubusercontent.com/tensorflow/tensorflow/master/README.md",
+              "explanation": "Download the file from the URL and saves it with the name tensorflow.md and move it to sols folder using mv command"
+            }
+          ],
+          "test": true
+        },
+        {
+          "staskid": 8,
+          "display": "dont",
+          "title": "Send a POST Request with curl",
+          "tasks": [
+            {
+              "task": "Send a POST request with data to a web server.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: curl -X POST -d 'data' [URL]",
+              "taskw": []
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Replace 'data' with the actual data you want to send in the POST request.",
+          "commands": [
+            {
+              "command": "curl -X POST -d 'data' [URL]",
+              "explanation": "This command sends a POST request with the specified data to the provided URL."
+            }
+          ],
+          "test": false
+        },
+        {
+          "staskid": 7,
+          "title": "Retrieve Headers Only with curl",
+          "tasks": [
+            {
+              "task": "Retrieve headers only from a web server without downloading the full content.",
+              "taskw": []
+            },
+            {
+              "task": "Usage: curl_-I_[URL]",
+              "taskw": [1]
+            }
+          ],
+          "answer": "",
+          "status": 0,
+          "info": "",
+          "hint": "Useful for quickly checking server responses without downloading the full content.",
+          "commands": [
+            {
+              "command": "curl -I https://raw.githubusercontent.com/tensorflow/tensorflow/master/README.md",
+              "explanation": "This command sends a HEAD request to the server and retrieves only the headers, providing information such as HTTP status code and content type."
+            }
+          ],
+          "test": false
+        }
+    ]
+      
+}
+  
