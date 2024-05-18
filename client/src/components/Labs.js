@@ -22,7 +22,8 @@ function TaskUI({ setLabmode }) {
     {labid: 3, taskid: 1, tags:['linux']},
     {labid: 3, taskid: 2, tags:['linux']},
     {labid: 4, taskid: 1, tags:['aws', 'ec2', 'sg']},
-    {labid: 4, taskid: 2, tags:['aws', 'ec2', 'sg']}
+    {labid: 4, taskid: 2, tags:['aws', 'ec2', 'sg']},
+    {labid: 5, taskid: 1, tags:['docker']}
   ]);
   const selectLab = (l, t) => {
     console.log('1. ', l, t)

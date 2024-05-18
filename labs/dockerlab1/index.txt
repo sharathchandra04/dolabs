@@ -1,0 +1,119 @@
+| Command                                                                 | Explanation                                                                                           |
+|-------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| `sudo apt update`                                                       | Update the package index                                                                              |
+| `sudo apt install apt-transport-https ca-certificates curl software-properties-common` | Install prerequisites for Docker                                                                      |
+| `curl -fsSL https://download.docker.com/linux/ubuntu/gpg | sudo gpg --dearmor -o /usr/share/keyrings/docker-archive-keyring.gpg` | Add Docker's official GPG key                                                                        |
+| `echo "deb [arch=amd64 signed-by=/usr/share/keyrings/docker-archive-keyring.gpg] https://download.docker.com/linux/ubuntu $(lsb_release -cs) stable" | sudo tee /etc/apt/sources.list.d/docker.list > /dev/null` | Add Docker's official repository                                                                      |
+| `sudo apt update`                                                       | Update the package index                                                                              |
+| `sudo apt install docker-ce`                                            | Install Docker Community Edition                                                                      |
+| `sudo systemctl status docker`                                          | Verify Docker installation                                                                            |
+| `sudo usermod -aG docker ${USER}`                                        | Add current user to the `docker` group to run Docker commands without `sudo`                          |
+| `newgrp docker`                                                         | Apply the new group membership without logging out and back in                                        |
+| `docker pull ubuntu`                                                    | Pull an Ubuntu image from Docker Hub                                                                  |
+| `docker run -it ubuntu`                                                 | Run a container interactively using the Ubuntu image                                                  |
+| `docker ps`                                                             | List running Docker containers                                                                        |
+| `docker ps -a`                                                          | List all Docker containers, including stopped ones                                                    |
+| `docker stop <container_id>`                                            | Stop a running Docker container                                                                       |
+| `docker rm <container_id>`                                              | Remove a stopped Docker container                                                                     |
+| `docker rmi <image_id>`                                                 | Remove a Docker image                                                                                 |
+| `docker build -t my-python-app .`                                       | Build a Docker image from a Dockerfile in the current directory, tagging it as `my-python-app`        |
+| `docker run -p 4000:80 my-python-app`                                   | Run a container from the `my-python-app` image and map port 80 in the container to port 4000 on the host |
+| `docker-compose up`                                                     | Run Docker Compose to start services defined in a `docker-compose.yml` file                           |
+| `docker logs <container_id>`                                            | View logs for a Docker container                                                                      |
+| `docker exec -it <container_id> /bin/bash`                              | Get a shell inside a running Docker container                                                         |
+| `docker stop $(docker ps -q)`                                           | Stop all running Docker containers                                                                    |
+| `docker rm $(docker ps -a -q)`                                          | Remove all stopped Docker containers                                                                  |
+| `docker rmi $(docker images -q)`                                        | Remove all Docker images                                                                              |
+| `docker network ls`                                                     | List all Docker networks                                                                              |
+| `docker network inspect <network_name>`                                 | Get detailed information about a specific Docker network                                              |
+| `docker network create <network_name>`                                  | Create a new Docker network                                                                           |
+| `docker network rm <network_name>`                                      | Remove a Docker network                                                                               |
+| `docker network connect <network_name> <container_id>`                  | Connect a container to a specific network                                                             |
+| `docker network disconnect <network_name> <container_id>`               | Disconnect a container from a specific network                                                        |
+| `docker run -d --name <container_name> --network <network_name> <image_name>` | Run a container on a specific network                                                                 |
+| `docker network create --subnet=192.168.1.0/24 my_bridge`               | Create a custom bridge network with a specific subnet                                                 |
+| `docker run -d --name my_container --network my_bridge --ip 192.168.1.100 <image_name>` | Run a container with a specific IP address on a custom bridge network                                 |
+| `docker swarm init`                                                     | Initialize Docker Swarm                                                                               |
+| `docker network create -d overlay my_overlay`                           | Create an overlay network for Docker Swarm                                                            |
+| `docker service create --name my_service --network my_overlay <image_name>` | Deploy a service in Docker Swarm on an overlay network                                                |
+| `ping google.com`                                                       | Ping Google to check internet connectivity                                                            |
+| `nslookup google.com`                                                   | Test DNS resolution for Google                                                                        |
+| `docker network create -d macvlan --subnet=192.168.1.0/24 --gateway=192.168.1.1 -o parent=eth0 my_macvlan` | Create a Macvlan network                                                                              |
+| `docker run -it --rm --network my_macvlan --ip 192.168.1.100 alpine sh` | Run a container on a Macvlan network with a specific IP address                                       |
+| `docker exec -it $(docker ps -q -f name=my_service) sh`                 | Access a service container in Docker Swarm                                                            |
+| `docker run --rm -d --network host alpine sleep 1000`                   | Run a container using the host's network stack                                                        |
+| `docker exec -it container1 sh`                                         | Access a running container named `container1`                                                         |
+| `ping container2`                                                       | Ping another container named `container2` from inside a container                                     |
+| `docker-compose up -d`                                                  | Start services defined in a `docker-compose.yml` file in detached mode                                |
+| `docker network inspect my_bridge_network`                              | Inspect a custom bridge network named `my_bridge_network`                                             |
+
+
+
+
+
+
+| Command                                                                 | Explanation                                                                                           |
+|-------------------------------------------------------------------------|-------------------------------------------------------------------------------------------------------|
+| `docker info`                                                           | Display system-wide information about Docker installation                                             |
+| `docker images`                                                         | List all Docker images on the local system                                                            |
+| `docker pull <image_name>`                                              | Pull an image from Docker Hub to the local machine                                                    |
+| `docker push <image_name>`                                              | Push an image to Docker Hub                                                                           |
+| `docker tag <source_image> <target_image>`                              | Tag an image for a specific repository                                                                |
+| `docker inspect <container_id_or_name>`                                 | Display detailed information about a container or image                                               |
+| `docker history <image_name>`                                           | Show the history of an image                                                                          |
+| `docker cp <container_id>:<path_in_container> <path_on_host>`           | Copy files/folders from a container to the host                                                       |
+| `docker cp <path_on_host> <container_id>:<path_in_container>`           | Copy files/folders from the host to a container                                                       |
+| `docker commit <container_id> <new_image_name>`                         | Create a new image from a container's changes                                                         |
+| `docker rename <old_name> <new_name>`                                   | Rename a container                                                                                    |
+| `docker update --restart=no <container_id>`                             | Update container's restart policy                                                                     |
+| `docker stats`                                                          | Display a live stream of container(s) resource usage statistics                                       |
+| `docker top <container_id>`                                             | Display the running processes of a container                                                          |
+| `docker events`                                                         | Get real-time events from the Docker daemon                                                           |
+| `docker wait <container_id>`                                            | Block until a container stops, then print the exit code                                               |
+| `docker port <container_id>`                                            | List port mappings or a specific mapping for the container                                            |
+| `docker attach <container_id>`                                          | Attach local standard input, output, and error streams to a running container                         |
+| `docker diff <container_id>`                                            | Inspect changes to files or directories on a container's filesystem                                   |
+| `docker save -o <output_file.tar> <image_name>`                         | Save one or more images to a tar archive (streamed to STDOUT by default)                              |
+| `docker load -i <input_file.tar>`                                       | Load an image from a tar archive or STDIN                                                             |
+| `docker volume create <volume_name>`                                    | Create a new volume                                                                                   |
+| `docker volume ls`                                                      | List all Docker volumes                                                                               |
+| `docker volume inspect <volume_name>`                                   | Display detailed information about a volume                                                           |
+| `docker volume rm <volume_name>`                                        | Remove a volume                                                                                       |
+| `docker volume prune`                                                   | Remove all unused local volumes                                                                       |
+| `docker build -f <Dockerfile_path> -t <image_name> <context>`           | Build an image from a Dockerfile at a specific path                                                   |
+| `docker run --name <container_name> -v <host_path>:<container_path> <image_name>` | Run a container with a bind mount volume                                                              |
+| `docker service ls`                                                     | List services in Docker Swarm                                                                         |
+| `docker service rm <service_name>`                                      | Remove a service in Docker Swarm                                                                      |
+| `docker service scale <service_name>=<number_of_replicas>`              | Scale a service in Docker Swarm to the specified number of replicas                                   |
+| `docker stack deploy -c <compose_file> <stack_name>`                    | Deploy a new stack or update an existing stack in Docker Swarm                                        |
+| `docker stack ls`                                                       | List stacks in Docker Swarm                                                                           |
+| `docker stack rm <stack_name>`                                          | Remove a stack in Docker Swarm                                                                        |
+| `docker secret create <secret_name> <file>`                             | Create a secret from a file or STDIN in Docker Swarm                                                  |
+| `docker secret ls`                                                      | List secrets in Docker Swarm                                                                          |
+| `docker secret rm <secret_name>`                                        | Remove a secret in Docker Swarm                                                                       |
+| `docker config create <config_name> <file>`                             | Create a config from a file or STDIN in Docker Swarm                                                  |
+| `docker config ls`                                                      | List configs in Docker Swarm                                                                          |
+| `docker config rm <config_name>`                                        | Remove a config in Docker Swarm                                                                       |
+| `docker checkpoint create <container_id> <checkpoint_name>`             | Create a checkpoint from a running container                                                          |
+| `docker checkpoint ls <container_id>`                                   | List checkpoints for a container                                                                      |
+| `docker checkpoint rm <container_id> <checkpoint_name>`                 | Remove a checkpoint from a container                                                                  |
+| `docker swarm join --token <worker_or_manager_token> <manager_ip>:<port>` | Join a Docker Swarm as a worker or manager node                                                       |
+| `docker swarm leave`                                                    | Leave the Docker Swarm                                                                                |
+| `docker node ls`                                                        | List nodes in Docker Swarm                                                                            |
+| `docker node promote <node_name>`                                       | Promote a node to a manager in Docker Swarm                                                           |
+| `docker node demote <node_name>`                                        | Demote a manager to a worker in Docker Swarm                                                          |
+| `docker node rm <node_name>`                                            | Remove a node from Docker Swarm                                                                       |
+| `docker plugin ls`                                                      | List Docker plugins                                                                                   |
+| `docker plugin install <plugin_name>`                                   | Install a Docker plugin                                                                               |
+| `docker plugin remove <plugin_name>`                                    | Remove a Docker plugin                                                                                |
+| `docker plugin enable <plugin_name>`                                    | Enable a Docker plugin                                                                                |
+| `docker plugin disable <plugin_name>`                                   | Disable a Docker plugin                                                                               |
+
+
+
+
+
+
+
+
+

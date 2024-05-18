@@ -5,6 +5,8 @@ import { Grid, Button, Paper, Select, MenuItem, Box, FormControl, InputLabel } f
 import TaskUI from './components/Tests';
 import Labs from './components/Labs';
 import Awscomp from './components/Awscomp';
+import Dockercomp from './components/Dockercomp';
+
 // import {Labs, TaskUI, Awscomp} from './components';
 import React, { useState, useEffect } from 'react';
 import { styled } from '@mui/material/styles';
@@ -23,6 +25,9 @@ function App() {
   const [labmode, setLabmode] = useState(false);
   const [labType, setLabType] = useState('aws');
   const [creds, setCreds] = useState({});
+  const [ip, setIps] = useState(['localhost', '44.222.226.246']);
+  const [ipi, setIpsi] = useState(0);
+  
   // const [numTasks, setNumTasks] = useState(3);
   const setlabandtask = (labid, taskid) => {
     setLabid(labid)
@@ -42,8 +47,26 @@ function App() {
     console.log('creds--> ', creds)
     setCreds(creds)
   }
+  const kk = () => {
+    // document.getElementById('myframe').addEventListener('load', function() {
+    //   // var iframeContent = this.contentDocument || this.contentWindow.document;
+    //   // var portInput = iframeContent.getElementById('port');
+    //   // if (portInput) {
+    //   //     portInput.value = '48';
+    //   // }
+
+    // });
+    var iframeContent = document.getElementById('myframe').contentDocument || document.getElementById('myframe').contentWindow.document;
+    var portInput = iframeContent.getElementById('port');
+    if (portInput) {
+        portInput.value = '48';
+    }
+
+  }
   return (
     <div className="App">
+      <Button onClick={()=> {if(ipi){setIpsi(0)}else{setIpsi(1)}}}>Button</Button>
+      <Button onClick={()=> { kk() }}>AutoFill</Button>
       {(labmode)&&(labType==='linux')&&(<Grid container spacing={0}>
             <Grid item xs={12} sm={5}>
               <div style={{ height: '100vh', backgroundColor: '#d4ddfa' }}>
@@ -53,11 +76,11 @@ function App() {
             <Grid item xs={12} sm={7}>
               <div style={{ height: '100vh', backgroundColor: '#e0e0e0' }}>
                 <iframe
+                  id="myframe"
                   title="Your iFrame"
-                  src="http://localhost:8888"
+                  src={`http://${ip[ipi]}:8888/?hostname=localhost&username=sharath&port=22&password=MDQxMDE5OThCaXQ=&command='ls'`}
                   width="100%"
                   height="100%"
-                  frameBorder="0"
                 ></iframe>
               </div>
             </Grid>
@@ -70,6 +93,31 @@ function App() {
         setcreds={setcreds}
         creds={creds}
       />)}
+      {(labmode)&&(labType==='docker')&&(<Grid container spacing={0}>
+        <Grid item xs={12} sm={5}>
+          <div style={{ height: '100vh', backgroundColor: '#d4ddfa' }}>
+            {/* <TaskUI taskid={taskid} labid={labid} gotoListMode={gotoListMode} /> */}
+            <Dockercomp 
+              taskid={taskid} 
+              labid={labid} 
+              gotoListMode={gotoListMode}
+              // setcreds={setcreds}
+              // creds={creds}
+            />
+          </div>
+        </Grid>
+        <Grid item xs={12} sm={7}>
+          <div style={{ height: '100vh', backgroundColor: '#e0e0e0' }}>
+            <iframe
+              id="myframe"
+              title="Your iFrame"
+              src="http://localhost:8888"
+              width="100%"
+              height="100%"
+            ></iframe>
+          </div>
+        </Grid>
+      </Grid>)}
       {(!labmode)&&(<div style={{backgroundColor:'grey', padding: '25px'}}>
         <Grid container>
           <Grid item xs={6} sm={1}>
@@ -84,7 +132,7 @@ function App() {
                     label="Select Lab Type"
                     onChange={selectLabType}
                   >
-                    {['linux', 'aws'].map((lt, index) => (
+                    {['linux', 'aws', 'docker'].map((lt, index) => (
                       <MenuItem key={index} value={lt}>{lt}</MenuItem>
                     ))}
                   </Select>

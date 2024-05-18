@@ -14,6 +14,7 @@ labdict = {
     'lab2': 'linuxtasks2',
     'lab3': 'linuxtasks3',
     'lab4': 'awslab1',
+    'lab5': 'dockerlab1',
 }
 
 @app.route('/check_task', methods=['POST'])
@@ -149,3 +150,29 @@ def getinsid():
          
 if __name__ == '__main__':
     app.run(debug=True)
+
+# clone project
+# ------------------------
+# git clone https://github.com/sharathchandra04/dolabs.git
+# cd dolabs/
+
+# backend setup(terminal)
+# -------------------------
+# python3 -m venv venv
+# source venv/bin/activate
+# cd server/
+# pip install -r requirements.txt 
+
+# start server backend
+# ------------------------
+# python server.py 
+
+# setup frontend(new terminal)
+# ------------------------
+# cd client
+# nvm use 20
+# npm install
+
+# start frontend
+# ------------------------
+# npm start 
