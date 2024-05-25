@@ -1,156 +1,164 @@
 {
-	"title": "Linux Lab 1 (navigation)",
-	"description": "In this lab you will learn to creae and delte directories and files in ubuntu You will also learn about navigation through file system.",
+	"title": "Dockre Lab 1",
+	"description": "",
 	"descriptionw": [],
 	"prerequisites": [],
-	"url": "/task/1",
 	"taskid": 1,
-	"labid": 1,
+	"labid": 5,
 	"subtasks": [
         {
             "staskid": 1,
             "tasks": [
                 {
-                    "task": "view current directory, /home/ubuntu is your home directory. you will learn about home directory in future ",
-                    "taskw": [3]
+                    "task": "",
+                    "taskw": []
                 }
             ],
-            "title":"1. pwd (Present woking Directory)",
+            "title":"docker version",
             "answer": "pwd",
             "status": 0,
             "info": "",
             "hint": "",
             "commands": [
-                { "command": "pwd","explanation": "Print current directory, you should be home directory" }
+                { "command": "docker --version","explanation": "" }
             ],
-            "test": false
+            "questions": [
+            ],
+            "test": true
         },
         {
             "staskid": 2,
             "tasks": [
                 {
-                    "task": "list files and directories in current directory",
+                    "task": "",
                     "taskw": []
                 }
             ],
-            "title":"2. ls",
+            "title":"Learn about --help",
             "answer": "ls",
             "status": 0,
             "info": "",
             "hint": "",
             "commands": [
-                { "command": "ls","explanation": "you should see empty list" }
+              { "command": "docker --help", "explanation": "Displays help information for the Docker CLI." },
+              { "command": "docker run --help", "explanation": "Displays help information for the 'docker run' command, including usage options and examples." },
+              { "command": "docker container --help", "explanation": "Displays help information for managing containers with Docker, including subcommands for starting, stopping, and inspecting containers." },
+              { "command": "docker image --help", "explanation": "Displays help information for managing images with Docker, including subcommands for listing, removing, and inspecting images." },
+              { "command": "docker volume --help", "explanation": "Displays help information for managing volumes with Docker, including subcommands for creating, removing, and inspecting volumes." }
             ],
-            "test": false
+            "test": true
         },
         {
             "staskid": 3,
             "tasks": [
                 {
-                    "task": "create a directory(folder) named dirone using mkdir",
-                    "taskw": [4, 6]
-                }
-            ],
-            "title":"3. mkdir",
-            "answer": "ls",
-            "status": 0,
-            "info": "",
-            "hint": "",
-            "commands": [
-                { "command": "mkdir dirone", "explanation": "create a directory called dirone" }
-            ],
-            "test": true
-        },
-        {
-            "staskid": 4,
-            "tasks": [
-                {
-                    "task": "list files and directories in current directory",
+                    "task": "",
                     "taskw": []
                 }
             ],
-            "title":"4. ls again",
+            "title":"run your first container. learn docker logs",
             "answer": "ls",
             "status": 0,
             "info": "",
             "hint": "",
             "commands": [
-                { "command": "ls","explanation": "now you should see dirone folder you created in the previous step" }
+              { "command": "docker run hello-world", "explanation": "Runs a container using the 'hello-world' image to verify Docker installation." },
+              { "command": "docker run --name hw1 hello-world", "explanation": "Runs a container using the 'hello-world' image and names it 'hw1'." },
+              { "command": "docker run --name hw2 hello-world", "explanation": "Runs a container using the 'hello-world' image and names it 'hw2'." },
+              { "command": "docker ps", "explanation": "Lists all containers, including those that are stopped." },
+              { "command": "docker ps -a", "explanation": "Lists all containers, including those that are stopped." },
+              { "command": "docker logs hw1", "explanation": "Displays the logs of the container named 'hw1'." },
+              { "command": "docker logs hw2", "explanation": "Displays the logs of the container named 'hw2'." },
+              { "command": "docker logs hw1 > ./task3.txt", "explanation": "add logs of hw1 container to the file hw1logs.txt" }
             ],
-            "test": false
+            "test": true
         },
         {
             "staskid": 5,
             "tasks": [
                 {
-                    "task": "go into dirone and list files and comeout of dirone",
+                    "task": "",
                     "taskw": []
                 }
             ],
-            "title":"5. learn navigation",
-            "answer": "cd \n cd .. \n",
+            "title":"learn docker inspect and docker exec",
+            "answer": "",
             "status": 0,
             "info": "",
             "hint": "",
             "commands": [
-                { "command": "cd dirone","explanation": "go into dirone folder" },
-                { "command": "ls","explanation": "list files, this time you have some files directories" },
-                { "command": "pwd","explanation": "check location, inside dirone" },
-                { "command": "cd ..","explanation": "come out of dirone folder" },
-                { "command": "pwd","explanation": "check location, outside dirone" }
+              { "command": "docker run --name nginxcont nginx", "explanation": "Runs a container using the 'nginx' image and names it 'nginxcont'. Prss CTL+C to exit out of the container. you can try docker logs 'nginxcont', docker inspect 'nginxcont'" },
+              { "command": "ps aux", "explanation": "Displays information about all running processes on the host system." },
+              { "command": "docker run -it -d --name ubc ubuntu", "explanation": "Runs a container in detached mode using the 'ubuntu' image, with an interactive terminal, and names it 'ubc'." },
+              { "command": "docker exec -it ubc bash", "explanation": "Starts a bash shell inside the running 'ubc' container." },
+              { "command": "", "explanation": "The follwing two commands till command 'exit' should be ececute within the 'ubc' container" },
+              { "command": "ps aux", "explanation": "Displays information about all running processes within the 'ubc' container." },
+              { "command": "exit", "explanation": "Exits the bash shell within the 'ubc' container." },
+              { "command": "", "explanation": "'ps aux' displayed different processes in the container from the host. why ?" },
+              { "command": "docker inspect nginxcont", "explanation": "check ipaddress, network, status, image and other details" },
+              { "command": "docker inspect ubc", "explanation": "check ipaddress, network, status, image and other details" },
+              { "command": "docker ps", "explanation": "Lists all running Docker containers." },
+              { "command": "docker ps -a", "explanation": "Lists all Docker containers, including those that are stopped." }
             ],
-            "test": false
+            "questions":[
+                {
+                    "qid": "5151",
+                    "label": "nginxcont ID",
+                    "q": "what is the Container ID of nginxCont ?",
+                    "type": "text"
+                },
+                {
+                    "qid": "5152",
+                    "label": "ubc IP address",
+                    "q": "what is the ipAddress of ubc ?",
+                    "type": "text"
+                }
+            ],
+            "test": true
         },
         {
             "staskid": 6,
             "tasks": [
                 {
-                    "task": "create another two directories dirtwo, dirthree",
-                    "taskw": [4,5]
+                    "task": "",
+                    "taskw": []
                 }
             ],
-            "title":"6. learn mkdir",
-            "answer": "mkdir dirtwo \n mkdir dirthree \n",
+            "title":"Learn docker ps & docker rm",
+            "answer": "",
             "status": 0,
             "info": "",
             "hint": "",
             "commands": [
-                { "command": "mkdir dirtwo", "explanation": "create a directory called dirtwo" },
-                { "command": "mkdir dirthree", "explanation": "create a directory called dirthree" },
-                { "command": "ls","explanation": "you will see dirone, dirtwo, dirthree" }
+              { "command": "docker ps -a", "explanation": "Lists all Docker containers, including those that are stopped." },
+              { "command": "docker rm hw1", "explanation": "Removes the container named 'hw1'." },
+              { "command": "docker ps -a", "explanation": "verify 'hw1' has been removed." },
+              { "command": "docker rm hw2", "explanation": "Removes the container named 'hw2'" },
+              { "command": "docker ps -a", "explanation": "Removes the container named 'hw2'." }
             ],
-            "test": false
+            "test": true
         },
         {
             "staskid": 7,
             "tasks": [
                 {
-                    "task": "create a new file using touch command in each directory" ,
-                    "taskw": [5]
-                },
-                {
-                    "task": "one.txt in dirone" ,
-                    "taskw": [0, 2]
-                },
-                {
-                    "task": "two.txt in dirtwo" ,
-                    "taskw": [0, 2]
-                },
-                {
-                    "task": "three.txt in dirthree" ,
-                    "taskw": [0, 2]
+                    "task": "",
+                    "taskw": []
                 }
             ],
-            "title":"create files inside directories",
-            "answer": "mkdir ",
+            "title":"learn to manage images",
+            "answer": "",
             "status": 0,
             "info": "",
             "hint": "",
             "commands": [
-                { "command": "cd dirone", "explanation": "go into dirone" },
-                { "command": "touch one.txt", "explanation": "create text file called one.txt" },
-                { "command": "cd ..", "explanation": "go into dirone" },
-                { "explanation": "create two.txt & three.txt in similar way" }
+              { "command": "docker images", "explanation": "Lists all Docker images available on the host." },
+              { "command": "docker pull busybox", "explanation": "Pulls the 'busybox' image from the Docker Hub repository." },
+              { "command": "docker pull mysql", "explanation": "Pulls the 'mysql' image from the Docker Hub repository." },
+              { "command": "docker pull httpd", "explanation": "Pulls the 'httpd' image from the Docker Hub repository." },
+              { "command": "docker images", "explanation": "Lists all Docker images available on the host, including the newly pulled images." },
+              { "command": "docker rmi busybox", "explanation": "Removes the 'busybox' image from the host." },
+              { "command": "docker images", "explanation": "Lists all Docker images available on the host, to verify the removal of the 'busybox' image." }
             ],
             "test": true
         },
@@ -158,19 +166,476 @@
             "staskid": 8,
             "tasks": [
                 {
-                    "task": "get history of the commands you typed so far" ,
-                    "taskw": [1]
+                    "task": "",
+                    "taskw": []
                 }
             ],
-            "title":"8. learn History",
-            "answer": "history",
+            "title":"learn to stop and start a container",
+            "answer": "",
             "status": 0,
             "info": "",
             "hint": "",
             "commands": [
-                { "command": "history", "explanation": "outputs a list of commands typed so far" }
-            ],
+              { "command": "docker ps", "explanation": "Lists all currently running Docker containers to check the initial state." },
+              { "command": "docker stop nginxcont", "explanation": "Stops the running container named 'nginxcont'." },
+              { "command": "docker ps", "explanation": "Lists all currently running Docker containers to verify that 'nginxcont' has been stopped." },
+              { "command": "docker ps -a", "explanation": "Lists all Docker containers, including those that are stopped, to confirm the stopped state of 'nginxcont'." },
+              { "command": "docker start nginxcont", "explanation": "Starts the previously stopped container named 'nginxcont'." },
+              { "command": "docker ps", "explanation": "Lists all currently running Docker containers to verify that 'nginxcont' is running again." },
+              { "command": "docker ps -a", "explanation": "Lists all Docker containers, including those that are stopped, to confirm the state of 'nginxcont' after starting it." }
+            ],              
             "test": false
-        }		
+        },
+        {
+            "staskid": 9,
+            "tasks": [
+                {
+                    "task": "",
+                    "taskw": []
+                }
+            ],
+            "title":"remove all & stop all",
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "commands": [
+              { "command": "docker ps -a", "explanation": "Lists all Docker containers, including those that are stopped, to confirm the state of 'nginxcont' after starting it." },
+              { "command": "docker ps -q", "explanation": "Lists the IDs of all currently running Docker containers." },
+              { "command": "docker stop $(docker ps -q)", "explanation": "Command Stop all running containers, try to understand the subcommand" },
+              { "command": "docker rm $(docker ps -aq)", "explanation": "Removes all Docker containers by passing the list of container IDs obtained from 'docker ps -aq' as arguments to 'docker rm'." }
+            ],   
+            "test": true
+        },
+        {
+            "staskid": 10,
+            "tasks": [
+                {
+                    "task": "",
+                    "taskw": []
+                }
+            ],
+            "title":"just observe",
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "test": true,
+            "commands": [
+              { 
+                "command": "docker images", 
+                "explanation": "Lists all Docker images currently available on the host." 
+              },
+              { 
+                "command": "docker pull ubuntu", 
+                "explanation": "Pulls the latest Ubuntu image from Docker Hub." 
+              },
+              {
+                "command": "docker run --name thiswillexit ubuntu",
+                "explanation": "Runs a container using the latest Ubuntu image."
+              },
+              {
+                "command": "docker ps",
+                "explanation": "Lists all currently running Docker containers. At this point, it might not show the Ubuntu container because it's likely stopped."
+              },
+              {
+                "command": "docker ps -a",
+                "explanation": "Lists all Docker containers, including those that are stopped. This command will show the Ubuntu container in a stopped state."
+              }
+            ]
+        },
+        {
+            "staskid": 11,
+            "tasks": [
+                {
+                    "task": "",
+                    "taskw": []
+                }
+            ],
+            "title":"understad the option -i(interactive) -t(tty) and -d(detach) [very important]",
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "test": false,
+            "commands": [
+              {
+                "command": "docker run --name ubn01 ubuntu",
+                "explanation": "Runs a Docker container using the 'ubuntu' image with the name 'ubn01'. This command starts the container but doesn't specify any additional command to run inside it."
+              },
+              {
+                "command": "docker run --name ubn02 ubuntu ls",
+                "explanation": "Runs a Docker container using the 'ubuntu' image with the name 'ubn02'. The 'ls' command is executed inside the container, listing the contents of the root directory."
+              },
+              {
+                "command": "docker run -it --name ubn1 ubuntu && exit",
+                "explanation": "Runs a Docker container in interactive mode (-it) using the 'ubuntu' image with the name 'ubn1'. The container starts, but the 'exit' command immediately terminates it."
+              },
+              {
+                "command": "docker run -it --name ubn2 ubuntu ls",
+                "explanation": "Runs a Docker container in interactive mode (-it) using the 'ubuntu' image with the name 'ubn2'. The 'ls' command is executed inside the container, listing the contents of the root directory. However, the container is started in detached mode (-d), which means it runs in the background. Since there's no interactive command to keep the container running, Docker will use the default command defined in the Dockerfile of the image, which typically doesn't require interaction and may result in an immediate container exit."
+              },
+              {
+                "command": "docker run -it --name ubn3 ubuntu bash -c 'while true; do sleep 1; done' && exit",
+                "explanation": "Runs a Docker container in interactive mode (-it) using the 'ubuntu' image with the name 'ubn3'. Inside the container, a bash shell is launched with a loop that sleeps for 1 second indefinitely. However, the 'exit' command is executed immediately, terminating the container."
+              },
+              {
+                "command": "docker run -d --name ubn4 ubuntu",
+                "explanation": "Runs a Docker container in detached mode (-d) using the 'ubuntu' image with the name 'ubn4'. The container starts in the background."
+              },
+              {
+                "command": "docker run -d --name ubn5 ubuntu bash",
+                "explanation": "Runs a Docker container in detached mode (-d) using the 'ubuntu' image with the name 'ubn5'. The 'bash' command is executed inside the container. Since it's in detached mode, the container runs in the background."
+              },
+              {
+                "command": "docker run -d --name ubn6 ubuntu ls && docker logs ubn6",
+                "explanation": "Runs a Docker container in detached mode (-d) using the 'ubuntu' image with the name 'ubn6'. The 'ls' command is executed inside the container. The 'docker logs ubn6' command retrieves the logs of the 'ubn6' container, but since 'ls' typically doesn't produce any output unless there's an error, the log output may be empty."
+              },
+              {
+                "command": "docker run -d --name ubn7 ubuntu bash",
+                "explanation": "Runs a Docker container in detached mode (-d) using the 'ubuntu' image with the name 'ubn7'. The 'bash' command is executed inside the container. However, since detached mode doesn't allocate a pseudo-TTY (terminal), the container is running in the background without an attached terminal."
+              },
+              {
+                "command": "docker run -it -d --name ubn8 ubuntu",
+                "explanation": "Runs a Docker container in interactive mode (-it) and detached mode (-d) using the 'ubuntu' image with the name 'ubn8'. Although the container is started with interactive mode, detached mode takes precedence, and the container runs in the background. Since there's no interactive command to keep the container running, Docker will use the default command defined in the Dockerfile of the image, which typically doesn't require interaction."
+              },
+              {
+                "command": "docker run -it -d --name ubn9 ubuntu bash",
+                "explanation": "Runs a Docker container in interactive mode (-it) and detached mode (-d) using the 'ubuntu' image with the name 'ubn9'. The 'bash' command is executed inside the container. Since detached mode doesn't allocate a pseudo-TTY (terminal), the container runs in the background without an attached terminal."
+              },
+              {
+                "command": "docker run -it -d --name ubn10 ubuntu bash -c 'while true; do sleep 1; done'",
+                "explanation": "Runs a Docker container in interactive mode (-it) and detached mode (-d) using the 'ubuntu' image with the name 'ubn10'. Inside the container, a bash shell is launched with a loop that sleeps for 1 second indefinitely."
+              },
+              {
+                "command": "docker run -it -d --name ubn11 ubuntu bash",
+                "explanation": "Runs a Docker container in interactive mode (-it) and detached mode (-d) using the 'ubuntu' image with the name 'ubn11'. The 'bash' command is executed inside the container. Since detached mode doesn't allocate a pseudo-TTY (terminal), the container runs in the background without an attached terminal."
+              }
+            ]              
+        },
+        {
+            "staskid": 12,
+            "tasks": [
+                {
+                    "task": "",
+                    "taskw": []
+                }
+            ],
+            "title":"prepare for next task",
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "test": true,
+            "commands": [
+              { 
+                "command": "docker ps -a", 
+                "explanation": "Lists all Docker containers, including those that are stopped." 
+              },
+              { 
+                "command": "docker ps", 
+                "explanation": "Lists all currently running Docker containers." 
+              },
+              { 
+                "command": "docker stop $(docker ps -q)", 
+                "explanation": "Stops all Docker running containers. The inner command 'docker ps -q' lists all container IDs in quiet mode, which means only the IDs are printed. These IDs are then passed to the 'docker stop' command to stop the containers." 
+              },
+              { 
+                "command": "docker rm $(docker ps -aq)", 
+                "explanation": "Removes all Docker containers, both running and non-running. The inner command 'docker ps -aq' lists all container IDs in quiet mode, which means only the IDs are printed. These IDs are then passed to the 'docker rm' command to remove the containers." 
+              }
+            ]
+        },
+        {
+            "staskid": 13,
+            "tasks": [
+                {
+                    "task": "",
+                    "taskw": []
+                }
+            ],
+            "title":"interat with ubuntu container",
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "test": true,
+            "commands": [
+              {
+                "command": "docker run -it -d --name myubn ubuntu bash",
+                "explanation": "Runs a Docker container named 'myubn' in detached mode (-d) and interactive mode (-it) using the 'ubuntu' image. It starts a bash shell inside the container."
+              },
+              {
+                "command": "docker exec -it myubn bash",
+                "explanation": "Executes a new bash shell session inside the running 'myubn' container interactively (-it)."
+              },
+              {
+                "command": "ls",
+                "explanation": "Lists the files and directories in the current directory inside the container."
+              },
+              {
+                "command": "apt-get update",
+                "explanation": "Updates the package lists for upgrades and new installations."
+              },
+              {
+                "command": "apt-get upgrade -y",
+                "explanation": "Upgrades all installed packages in the container without prompting for confirmation (-y)."
+              },
+              {
+                "command": "apt-get install -y curl",
+                "explanation": "Installs the 'curl' package in the container without prompting for confirmation (-y)."
+              },
+              {
+                "command": "echo 'Hello, Docker!' > /hello-docker.txt",
+                "explanation": "Creates a new file named 'hello-docker.txt' in the root directory of the container and writes the text 'Hello, Docker!' into it."
+              },
+              {
+                "command": "exit",
+                "explanation": "Exits the interactive session inside the container"
+              },
+              {
+                "command": "docker stop myubn",
+                "explanation": "Stops the container named 'myubn'."
+              },
+              {
+                "command": "docker start myubn",
+                "explanation": "Starts the previously stopped container named 'myubn'."
+              },
+              {
+                "command": "docker exec -it myubn bash",
+                "explanation": "Executes a new bash shell session inside the running 'myubn' container interactively (-it)."
+              },
+              {
+                "command": "ls",
+                "explanation": "It should include the 'hello-docker.txt' file created earlier."
+              }
+            ]            
+        },
+        {
+            "staskid": 14,
+            "tasks": [
+                {
+                    "task": "",
+                    "taskw": []
+                }
+            ],
+            "title":"learn docker commit",
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "test": true,
+            "commands": [
+              {
+                "command": "docker commit myubn myubn-image",
+                "explanation": "Commits the current state of the 'myubn' container to a new image named 'myubn-image'. This creates a new image with the changes made inside the container."
+              },
+              {
+                "command": "docker images",
+                "explanation": "Lists all Docker images currently available on the host. After committing changes to a new image, this command verifies that the new image 'myubn-image' is now present."
+              },
+              {
+                "command": "docker stop myubn",
+                "explanation": "Stops the container named 'myubn'."
+              },
+              {
+                "command": "docker ps",
+                "explanation": "Lists all currently running Docker containers. This command verifies that the 'myubn' container is no longer running after stopping it."
+              },
+              {
+                "command": "docker rm myubn",
+                "explanation": "Removes the container named 'myubn'. This step is necessary to clean up the stopped container, as it's no longer needed."
+              },
+              {
+                "command": "docker ps -a",
+                "explanation": "Lists all Docker containers, including those that are stopped. This command verifies that the 'myubn' container has been removed."
+              }
+            ]
+        },
+        {
+            "staskid": 15,
+            "tasks": [
+                {
+                    "task": "",
+                    "taskw": []
+                }
+            ],
+            "title":"learn docker copy",
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "test": true,
+            "commands": [
+              {
+                "command": "docker run -it -d --name myubnnew myubn-image bash",
+                "explanation": "Runs a new Docker container in interactive mode (-it) with the name 'myubnnew', using the custom image 'myubn-image'. It starts a bash shell inside the container."
+              },
+              {
+                "command": "docker ps && docker ps -a",
+                "explanation": "Lists all currently running Docker containers and all Docker containers, including those that are stopped, to verify that the 'myubnnew' container is running."
+              },
+              {
+                "command": "ls",
+                "explanation": "Lists the files and directories in the current directory inside the container."
+              },
+              {
+                "command": "docker cp myubnnew:/hello-docker.txt .",
+                "explanation": "Copies the file '/hello-docker.txt' from the 'myubnnew' container to the host's current directory."
+              },
+              {
+                "task": "Task 11: Copy a File from the Container to Host",
+                "command": "docker cp file.txt myubnnew:/file.txt",
+                "explanation": "Copies the file 'file.txt' from the host's current directory to the 'myubnnew' container."
+              },
+              {
+                "command": "ls",
+                "explanation": "Lists the files and directories in the current directory on the host. This command verifies that the 'hello-docker.txt' file has been copied from the container to the host."
+              }
+            ]
+        },
+        {
+            "staskid": 16,
+            "tasks": [
+                {
+                    "task": "",
+                    "taskw": []
+                }
+            ],
+            "title":"understand what is an ssh server [very important]",
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "test": true,
+            "commands": [
+              {
+                "command": "docker pull sharathchandra04/sharathchandra04:sshservercat",
+                "explanation": "Pulls the Docker image 'sharathchandra04/sharathchandra04:sshservercat' from the Docker Hub repository."
+              },
+              {
+                "command": "docker pull sharathchandra04/sharathchandra04:sshserverdog",
+                "explanation": "Pulls the Docker image 'sharathchandra04/sharathchandra04:sshserverdog' from the Docker Hub repository."
+              },
+              {
+                "command": "docker run -d -p 2222:22 --name cat sharathchandra04/sharathchandra04:sshservercat",
+                "explanation": "Runs a Docker container named 'cat' in detached mode (-d) with port mapping, exposing port 22 of the container as port 2222 on the host. It uses the 'sharathchandra04/sharathchandra04:sshservercat' image."
+              },
+              {
+                "command": "docker run -d -p 2223:22 --name dog sharathchandra04/sharathchandra04:sshserverdog",
+                "explanation": "Runs a Docker container named 'dog' in detached mode (-d) with port mapping, exposing port 22 of the container as port 2223 on the host. It uses the 'sharathchandra04/sharathchandra04:sshserverdog' image."
+              },
+              {
+                "command": "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' cat",
+                "explanation": "Retrieves the IP address of the 'cat' container."
+              },
+              {
+                "command": "docker inspect -f '{{range .NetworkSettings.Networks}}{{.IPAddress}}{{end}}' dog",
+                "explanation": "Retrieves the IP address of the 'dog' container."
+              },
+              {
+                "command": "docker exec -it cat bash",
+                "explanation": "Executes a bash shell interactively inside the 'cat' container."
+              },
+              {
+                "command": "ssh dog@<ip-of-dog-server>",
+                "explanation": "Connects to the 'dog' server from within the 'cat' container using SSH. Replace '<ip-of-dog-server>' with the actual IP address of the 'dog' server."
+              },
+              {
+                "command": "touch dogfile.txt",
+                "explanation": "Creates a new file named 'dogfile.txt' within the 'dog' container from within the 'cat' container."
+              },
+              {
+                "command": "exit",
+                "explanation": "Exits dog container."
+              },
+              {
+                "command": "exit",
+                "explanation": "exit cat container."
+              },
+              {
+                "command": "docker exec -it dog bash",
+                "explanation": "Executes a bash shell interactively inside the 'dog' container."
+              },
+              {
+                "command": "ls",
+                "explanation": "Lists the files and directories within the 'dog' container to verify if the 'dogfile.txt' was created."
+              },
+              {
+                "command": "exit",
+                "explanation": "Exits the interactive session within the 'dog' container."
+              }
+            ]                        
+        },
+        {
+            "staskid": 17,
+            "tasks": [
+                {
+                    "task": "",
+                    "taskw": []
+                }
+            ],
+            "title":"publish your image to docker registry.",
+            "answer": "",
+            "status": 0,
+            "info": "",
+            "hint": "",
+            "test": true,
+            "commands": [
+              {
+                "command": "docker stop $(docker ps -q)",
+                "explanation": "Stops all running Docker containers. The inner command 'docker ps -q' lists only the IDs of running containers."
+              },
+              {
+                "command": "docker rm $(docker ps -aq)",
+                "explanation": "Removes all Docker containers, including those that are stopped. The inner command 'docker ps -aq' lists only the IDs of all containers."
+              },
+              {
+                "command": "docker run -it -d --name ubn ubuntu bash",
+                "explanation": "Runs a new Docker container named 'ubn' in interactive (-it) and detached (-d) mode, using the 'ubuntu' image. It starts a bash shell inside the container."
+              },
+              {
+                "command": "docker exec -it ubn bash",
+                "explanation": "Executes a new bash shell session inside the 'ubn' container interactively (-it)."
+              },
+              {
+                "command": "apt-get update",
+                "explanation": "Updates the package lists for upgrades and new installations inside the 'ubn' container."
+              },
+              {
+                "command": "apt-get install -y curl",
+                "explanation": "Installs the 'curl' package in the 'ubn' container without prompting for confirmation (-y)."
+              },
+              {
+                "command": "touch fileone.txt && touch filetwo.txt",
+                "explanation": "Creates two new empty files named 'fileone.txt' and 'filetwo.txt' inside the 'ubn' container."
+              },
+              {
+                "command": "exit",
+                "explanation": "Exits the interactive session inside the 'ubn' container."
+              },
+              {
+                "command": "docker ps",
+                "explanation": "Lists all currently running Docker containers to get the ID of the 'ubn' container."
+              },
+              {
+                "command": "docker commit <container_id> custom-ubuntu-image",
+                "explanation": "Commits the changes made to the 'ubn' container to a new image named 'custom-ubuntu-image'. Replace '<container_id>' with the actual ID of the 'ubn' container."
+              },
+              {
+                "command": "docker tag custom-ubuntu-image <username>/<reponame>:custom-ubuntu-image",
+                "explanation": "Tags the newly created image with a repository name. Replace '<username>/<reponame>' with your Docker Hub username and repository name."
+              },
+              {
+                "command": "docker login",
+                "explanation": "Logs in to Docker Hub."
+              },
+              {
+                "command": "docker push <username>/<reponame>:custom-ubuntu-image",
+                "explanation": "Pushes the tagged image to your Docker Hub repository. Replace '<username>/<reponame>' with your Docker Hub username and repository name."
+              }
+            ]          
+        }      
 	]
 }
+  

@@ -88,7 +88,7 @@
       },
       {
         "staskid": 5,
-        "title": "terminate instnce",
+        "title": "terminate instance",
         "description": "terminate ec2 instance ec2l4-2",
         "descriptionw": [],
         "specifications": [
@@ -102,6 +102,19 @@
         "description": "reboot ec2 instance ec2l4-1",
         "descriptionw": [],
         "specifications": [
+        ],
+        "test": false,
+        "status": 0
+      },
+      {
+        "staskid": 7,
+        "title": "edit inbound rules",
+        "description": "add a new inbound rule to open a port 3000 on the security group sgl4",
+        "descriptionw": [],
+        "specifications": [
+          {"key": "type", "value":"Custom TCP"},
+          {"key": "port", "value":"3000"},
+          {"key": "Allow", "value": "IPV4 everywhere (0.0.0.0)"}
         ],
         "test": false,
         "status": 0

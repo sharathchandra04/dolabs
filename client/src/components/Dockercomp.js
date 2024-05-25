@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Paper, Typography, IconButton, Card, CardContent, Tooltip, Chip } from '@material-ui/core';
+import { Paper, Typography, IconButton, Card, CardContent, Tooltip, Chip, FormControl, 
+  InputLabel, OutlinedInput, InputAdornment} from '@material-ui/core';
 import { ArrowBackIos, Circle, GradingOutlined, FiberManualRecordOutlined, FileCopyOutlined, 
-  Lightbulb, InfoOutlined, VpnKeyOutlined, CheckCircle, Cancel  } from '@mui/icons-material';
+  Lightbulb, InfoOutlined, VpnKeyOutlined, CheckCircle, Cancel, Psychology
+} from '@mui/icons-material';
 import { Grid } from '@material-ui/core';
 import axios from 'axios';
 import { styled } from '@mui/material/styles';
@@ -86,14 +88,33 @@ const DynamicText = ({ dynamicContent, specialWords }) => {
 function Dockercomp({labid, taskid, gotoListMode}) {
   const classes = useStyles();
   const [taskData, setTaskData] = useState(null);
-  const [buffer, setBuffer] = useState(false);
+  const [qMap, setQmap] = useState({});
+  const [tMap, setTmap] = useState({});
+  const [currtestid, setCurrtestid] = useState(null);
+
+  const recordAnswers = (qid, event) => {
+    const _qmap = {...qMap}
+    console.log(event.target.value)
+    _qmap[qid] = event.target.value
+    setQmap(_qmap);
+  };
   const loadLab = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/data1?labid=${labid}&taskid=${taskid}`);
+      const response = await axios.get(`http://localhost:5000/getdockerlab?labid=${labid}&taskid=${taskid}`);
       console.log(response.data)
       if(response.data.length) {
         const task = 0
         setTaskData(response.data[task]);
+        const d = response.data[task];
+        const tmap = {}
+        d.subtasks.forEach((s)=>{
+          tmap[s.staskid] = 0
+          // tmap[s.staskid] = false
+          // if(s.test){
+          // }
+        })
+        console.log(tmap)
+        setTmap(tmap)
       }
 
     } catch (error) {
@@ -112,29 +133,30 @@ function Dockercomp({labid, taskid, gotoListMode}) {
         console.error('Error copying to clipboard:', error);
       });
   };
-  const Test = () => {
+  const Test = (staskid) => {
+    setCurrtestid(staskid)
     const taskid = taskData.taskid
     const labid = taskData.labid
     const data = {
       lab_id: labid,
-      task_id: taskid
+      task_id: taskid,
+      stask_id: staskid,
+      qmap: qMap
     };
-    setBuffer(true)
-    axios.post('http://localhost:5000/check_task', data)
+    axios.post('http://localhost:5000/check_task_docker', data)
       .then((response) => {
-        setBuffer(false)
-        console.log('Response:', response.data);
         const results = response.data.results
-        const keys = Object.keys(results)
-        const _taskData = taskData
-        keys.forEach((key) => {
-
-          _taskData["subtasks"][Number(key)-1].status = results[key]?1:2;
-        })
-        setTaskData(_taskData)
+        setCurrtestid(null)
+        const _tmap = {...tMap}
+        if(results){
+          _tmap[staskid] = 1
+        } else {
+          _tmap[staskid] = 2
+        }
+        setTmap(_tmap)
       })
       .catch((error) => {
-        setBuffer(false)
+        setCurrtestid(null)
         console.error('Error:', error);
       });
   }
@@ -151,12 +173,6 @@ function Dockercomp({labid, taskid, gotoListMode}) {
           </div>
         </Grid>
         <Grid item sm={4} spacing={1}>
-          <div style={{ textAlign: 'right' }}>
-            <IconButton style={{ cursor: 'pointer', color:'#4c9ef5' }} onClick={()=>{ Test() }}>
-              {buffer && (<CircularProgress size={24} />)}
-              {!buffer && (<GradingOutlined style={{ fontSize: 30 }} />)}
-            </IconButton>
-          </div>
         </Grid>
       </Grid>
       {taskData !== null ? (
@@ -184,7 +200,7 @@ function Dockercomp({labid, taskid, gotoListMode}) {
             <br/>
             <h3><b>&nbsp;&nbsp;Execute the following Tasks</b>&nbsp;:&nbsp;&nbsp;</h3>
             {taskData.subtasks.map((subtask, index) => {
-              if (subtask.display != 'dont'){
+              if (subtask.display !== 'dont'){
                 return <div key={index}>
                 <Card className={classes.roundedCard}>
                   <CardContent>
@@ -223,11 +239,31 @@ function Dockercomp({labid, taskid, gotoListMode}) {
                         </Tooltip>
                       </Grid>
                       <Grid item sm={1} style={{paddingTop:'10px', paddingLeft:'10px'}}>
-                        {( buffer && subtask.test) && (<CircularProgress size={20} />)}
-                        {( buffer && !subtask.test) && (<Circle style={{ color: 'grey', fontSize: '15px' }}/>)}
-                        {(!buffer && subtask.status === 0) ? <Circle style={{ color: 'grey', fontSize: '15px' }}/> : null}
-                        {(!buffer && subtask.status === 1) ? <CheckCircle style={{ color: 'green', fontSize: 'large' }}/> : null}
-                        {(!buffer && subtask.status === 2) ? <Cancel style={{ color: 'red', fontSize: 'large' }} /> : null}
+                        {
+                          !subtask.test?(<Circle style={{ color: 'grey', fontSize: '15px' }}/>):<>
+                            {
+                              subtask.staskid === currtestid?<CircularProgress size={20} />:<>
+                                {(tMap[subtask.staskid] === 0) ? <Circle style={{ color: 'grey', fontSize: '15px' }}/> : null}
+                                {(tMap[subtask.staskid] === 1) ? <CheckCircle style={{ color: 'green', fontSize: 'large' }}/> : null}
+                                {(tMap[subtask.staskid] === 2) ? <Cancel style={{ color: 'red', fontSize: 'large' }} /> : null}
+                              </>
+                            }
+                          </>
+                        }
+                      </Grid>
+                    </Grid>
+                    <Grid container>
+                      <Grid spacing={0} item sm={11}></Grid>
+                      <Grid item sm={1} spacing={0}>
+                        {(subtask.test) && (<Chip
+                          label={'Test'}
+                          style={{border: 'solid 1px black'}}
+                          clickable
+                          onClick={() => {Test(subtask.staskid)} }
+                          variant="outlined"
+                          color="primary"
+                          size="small"
+                        />)}
                       </Grid>
                     </Grid>
                     <Typography style={{paddingBottom: '20px', fontSize:'17px'}} variant="body2" component="p">
@@ -243,8 +279,8 @@ function Dockercomp({labid, taskid, gotoListMode}) {
                       subtask.commands && (
                       <Grid container spacing={1} style={{backgroundColor: '#c7c6c3', borderRadius:'5px'}}>
                         <Grid container key={index}  spacing={1}>
-                          <Grid style={{textAlign: 'right'}} item sm={12} spacing={1}>
-                            <b style={{color:'maroon', textAlign: 'center'}}>Execute Commands</b>
+                          <Grid style={{textAlign: 'center', color:'maroon'}} item sm={12} spacing={1}>
+                            <b>Execute Commands</b>
                           </Grid>
                         </Grid>  
                         {subtask.commands.map((item, index) => {
@@ -267,32 +303,75 @@ function Dockercomp({labid, taskid, gotoListMode}) {
                                         <FileCopyOutlined onClick={() => handleCopy(item.command)} style={{cursor:'pointer', padding: 0, fontSize:'15px', color:'#4c9ef5'}}/>
                                       </Typography>
                                       <Typography style={{color:'black'}} variant="body1">
-                                        <small>&nbsp;&nbsp;{item.explanation}</small>
+                                        <small>&nbsp;&nbsp;&nbsp;&nbsp;{item.explanation}</small>
                                       </Typography>
                                     </Paper>
                                   </Grid>
-                                  {/* <Grid item sm={6} spacing={1}>
-                                    <Paper elevation={2} style={{ padding: 2 }}>
-                                    </Paper>
-                                  </Grid> */}
                                 </Grid>
                               )
                             } else {
                               return(
-                                  <Grid container item key={index}  spacing={1}>
-                                    <Grid item sm={12} spacing={1} style={{}}>
-                                      <Paper elevation={2} style={{ padding: 2, backgroundColor: 'yellow' }}>
-                                        <Typography variant="body1">
-                                          <small>&nbsp;&nbsp;{item.explanation}</small>
-                                        </Typography>
-                                      </Paper>
-                                    </Grid>
+                                <Grid container item key={index}  spacing={1}>
+                                  <Grid item sm={12} spacing={1} style={{}}>
+                                    <Paper elevation={2} style={{ padding: 2, backgroundColor: 'yellow' }}>
+                                      <Typography variant="body1">
+                                        <small>&nbsp;&nbsp;{item.explanation}</small>
+                                      </Typography>
+                                    </Paper>
                                   </Grid>
+                                </Grid>
                               )
                             }
                           })}
                       </Grid>)
                     }
+                    <div 
+                      style={{
+                        backgroundColor: '#c7c6c3', 
+                        borderRadius:'5px',
+                        margin: '-4px',
+                        padding: '4px'
+                      }}
+                    >
+                      <Grid container spacing={1}>
+                       {(subtask.questions)&&(subtask.questions.length!==0) && <Grid style={{textAlign: 'center'}} item sm={12} spacing={1}>
+                           <b style={{color:'maroon', textAlign: 'center'}}>Questions</b>
+                         </Grid>
+                       }
+                      </Grid>
+                    {(subtask.questions)&&(subtask.questions.map((question, index) => {
+                      return <DemoPaper key={index} style={{padding: '5px', margin: '2px', marginTop: '0px'}}>
+                        <Grid 
+                          container
+                          style={{paddingTop: '5px'}}
+                        >
+                          <Grid item sm={6} style={{}}>
+                            <div  
+                              style={{fontWeight: 'lighter', fontFamily: 'monospace', color: 'black'}}>
+                                <small>{question.q}</small>
+                            </div>
+                          </Grid>
+                          <Grid item sm={6} style={{}}>
+                            <FormControl fullWidth variant="outlined">
+                              <InputLabel>{question.label}</InputLabel>
+                              <OutlinedInput
+                                name="field1"
+                                value={qMap[question.qid]}
+                                onChange={(e) => {recordAnswers(question.qid, e)}}
+                                required  
+                                placeholder={question.label}
+                                startAdornment={<InputAdornment position="start">
+                                  <Psychology style={{ fontSize: 20 }} />
+                                </InputAdornment>}
+                                label={question.label}
+                              />
+                            </FormControl>
+                            
+                          </Grid>
+                        </Grid>
+                      </DemoPaper>
+                    }))}
+                    </div>
                   </CardContent>
                 </Card>
                 </div>

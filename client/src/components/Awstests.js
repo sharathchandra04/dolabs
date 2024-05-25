@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { makeStyles } from '@material-ui/core/styles';
-import { Box, Tabs, TextField, Tab, OutlinedInput, InputAdornment, Button, Modal, Paper, Typography, IconButton, Card, CardContent, Tooltip, 
-  Chip, FormControl, InputLabel } from '@material-ui/core';
+import { Box, Tabs, TextField, Tab, OutlinedInput, InputAdornment, Button, Modal, Paper, Typography, 
+  IconButton, Card, CardContent, Tooltip, Chip, FormControl, InputLabel } from '@material-ui/core';
 import { Person, ArrowBackIos, Circle, GradingOutlined, FiberManualRecordOutlined, FileCopyOutlined, 
   Lightbulb, InfoOutlined, VpnKeyOutlined, CheckCircle, Cancel, ManageAccounts, Lock, Key, Psychology,
   Laptop } from '@mui/icons-material';
@@ -111,13 +111,24 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
     field3: creds.field3 || '',
   });
 
-  const handleOpen = () => {setOpen(true);};
+  const handleOpen = () => {
+    const userid = localStorage.getItem('userid');
+    setFormData({
+      field1: userid || '',
+      field2: '',
+      field3: '',
+    })
+    setOpen(true);
+  };
   const handleClose = () => {setOpen(false);};
+  
   const recordAnswers = (qid, event) => {
-    const _qmap = qMap
+    const _qmap = {...qMap}
+    console.log(event.target.value)
     _qmap[qid] = event.target.value
     setQmap(_qmap);
   };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData({ ...formData, [name]: value });
@@ -127,8 +138,9 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
     try {
       const newformData = {}
       newformData.userid = formData.field1;
-      newformData.access = formData.field2;
-      newformData.secret = formData.field3;
+      localStorage.setItem('userid', formData.field1)
+      newformData.access = formData.field2 || '';
+      newformData.secret = formData.field3 || '';
       const response = await axios.post('http://localhost:5000/creds', newformData);
       console.log(response.data);
       setcreds(formData)
@@ -267,8 +279,7 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
                       <OutlinedInput
                         value={formData.field2}
                         onChange={handleChange}
-                        name="field2"
-                        required  
+                        name="field2"  
                         placeholder='access key'
                         startAdornment={<InputAdornment position="start">
                           <Lock style={{ fontSize: 20 }} />
@@ -285,7 +296,6 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
                         onChange={handleChange}
                         name="field3"
                         type="password"
-                        required  
                         placeholder='secret key'
                         startAdornment={<InputAdornment position="start">
                           <Key style={{ fontSize: 20 }} />
@@ -481,8 +491,13 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
                                         <FileCopyOutlined 
                                           onClick={() => handleCopy(item.value)} 
                                           style={{
+                                            backgroundColor: 'grey',
+                                            padding:'3px',
                                             marginLeft: 'auto', 
-                                            cursor:'pointer', padding: 0, fontSize:'15px', color:'#4c9ef5'
+                                            cursor:'pointer', 
+                                            fontSize:'15px',
+                                            borderRadius: '5px', 
+                                            color:'white',
                                           }}
                                         />
                                       </Grid>
@@ -597,7 +612,7 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
                        }
                       </Grid>
                     {(subtask.questions)&&(subtask.questions.map((question, index) => {
-                      return <DemoPaper style={{padding: '5px', margin: '2px', marginTop: '0px'}}>
+                      return <DemoPaper key={index} style={{padding: '5px', margin: '2px', marginTop: '0px'}}>
                         <Grid 
                           container
                           style={{paddingTop: '5px'}}

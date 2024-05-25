@@ -1,0 +1,279 @@
+Deploying and managing Ubuntu containers is a great way to get hands-on experience with Docker. Here are a series of tasks along with the commands needed to perform them. These tasks will help you understand how to use Docker to run, manage, and interact with Ubuntu containers.
+
+
+Install Docker:
+
+Install Docker on your local machine.
+Verify the installation by running 
+
+docker --version.
+
+docker --help
+docker run --help
+docker container --help
+docker image --help
+docker volume --help
+
+
+docker run hello-world.
+docker run  --name hw1 hello-world
+docker run  --name hw2 hello-world
+docker ps -a
+docker logs hw1
+docker logs hw2 
+
+docker run nginx --name nginxcont
+ps aux
+docker run nginx -it -d --name ubc ubuntu
+docker exec -it ubc bash
+    ps aux
+    exit
+docker inspect nginxcont
+docker inspect ubc
+docker ps
+docker ps -a
+
+docker ps -a
+docker rm hw1
+docker ps -a
+docker rm hw1
+docker ps -a
+
+docker images
+docker pull busybox
+docker pull mysql
+docker pull httpd
+docker images
+docker rmi busybox
+docker images
+
+docker stop nginxcont
+docker ps
+docker ps -a
+docker start nginxcont
+docker ps
+docker ps -a 
+    Explanation: List all containers, including the stopped ones
+
+remove all docker container running and non-running
+docker ps -q
+docker rm $(docker ps -aq)
+
+docker images
+docker pull ubuntu
+    Task 1: Pull an Ubuntu Image
+    Explanation: This command pulls the latest Ubuntu image from Docker Hub.
+docker run ubuntu 
+docker ps 
+docker ps -a
+
+
+learn -p -a
+&& docker ps && docker ps -a
+&& docker ps && docker ps -a
+
+docker run --name ubn01 ubuntu              
+docker run --name ubn02 ubuntu ls           
+
+docker run -it --name ubn1 ubuntu          && exit
+docker run -it --name ubn2 ubuntu ls  ---> strange
+docker run -it --name ubn3 ubuntu bash -c "while true; do sleep 1; done" --> CTRL+C, exit
+docker run -d  --name ubn4 ubuntu 
+docker run -d  --name ubn5 ubuntu bash
+docker run -d  --name ubn6 ubuntu ls       && docker logs
+docker run -d  --name ubn7 ubuntu bash  -->  we are running bash(bash is a specical command that needs a terminal) 
+                                but we don't have have teminal
+
+    When you run docker run -it -d ubuntu, the Docker container runs in detached mode (-d), 
+    which means it runs in the background. The -it flags (-i for interactive and -t for TTY) 
+    typically require an interactive command to keep the container running, but if no command 
+    is specified, Docker will use the default command defined in the Dockerfile of the image.
+docker run -it -d --name ubn8 ubuntu
+docker run -it -d --name ubn9 ubuntu bash
+docker run -it -d --name ubn10 ubuntu bash -c "while true; do sleep 1; done"
+docker run -it -d --name ubn11 ubuntu bash
+
+docker ps -a
+docker ps
+docker rm $(docker ps -aq)
+    remove all the containers running and non runnig
+
+docker run -it -d --name myubn ubuntu bash
+docker exec -it myubn bash
+    ls
+    apt-get update 
+    apt-get upgrade -y
+    apt-get install -y curl ( remember installing nginx using apt in linux class? )
+    echo "Hello, Docker!" > /hello-docker.txt
+        Inside the running Ubuntu container, create a new file with the text "Hello, Docker!".
+    exit (Exit the interactive session and stop the container)
+docker stop myubn
+docker start myubn
+docker exec -it myubn bash 
+    ls // hello-docker.txt
+
+docker commit myubn myubn-image (Commit Changes to a New Image)
+    Explanation: Commit the current state of the my-ubuntu-container to a new image named my-ubuntu-image.
+    docker images
+docker stop myubn
+docker ps 
+docker rm myubn 
+docker ps -a
+
+docker run -it --name myubnnew myubn-image bash
+    Task 10: Run a New Container from the Custom Image
+    Explanation: Run a new container from the custom image my-ubuntu-image.
+    docker ps && docker ps -a
+ls
+docker cp myubnnew:/hello-docker.txt .
+docker cp file.txt myubnnew:/file.txt
+    Task 11: Copy a File from the Container to Host
+    Explanation: Copy the file /hello-docker.txt from the my-ubuntu-container to the host's current directory.
+    ls
+
+docker stop $(docker ps -q)
+docker   rm $(docker ps -aq)
+docker volume create my-volume
+    Task 12: Create and Use a Docker Volume
+docker run -it --name myubn -v my-volume:/mydata ubuntu
+    Explanation:
+    Create a Docker volume named my-volume.
+    Run an Ubuntu container with the volume mounted to /mydata.
+    docker exec -it myubn bash
+        ls /mydata
+        touch /mydata/fileone.txt
+        exit
+    cd /var/lib/docker/volumes/my-volume
+    ls (see fileone.txt)
+    touch filetwo.txt
+    docker exec -it name bash
+    ls /mydata
+docker volume inspect my-volume
+    Task 13: Inspect a Docker Volume
+    Explanation: Inspect the details of the my-volume Docker volume.
+docker stop myubn
+docker rm myubn
+    Task 14: Remove the Container
+    Explanation: Remove the my-ubuntu-container. The container must be stopped to be removed.
+
+docker rmi myubn-image
+    Task 15: Remove the Image
+    Explanation: Remove the my-ubuntu-image from the local Docker registry.
+
+docker system prune -a
+    Task 16: Clean Up Unused Resources
+    Explanation: Clean up unused containers, images, and networks. This is a powerful command that will free 
+    up space by removing all stopped containers, all networks not used by at least one container, all 
+    dangling images, and optionally, all unused images.
+
+By following these tasks and commands, you'll gain practical experience in managing Docker containers, 
+images, and volumes using Ubuntu. This foundational knowledge will be valuable as you progress to more 
+complex Docker use cases.
+
+Port forwarding
+-----------------------------------------------------------------------------------
+docker stop $(docker ps -q)
+docker   rm $(docker ps -aq)
+docker run -d --name nginx1 nginx
+http://<ip>:80 (nginx runs at port 80 inside the container but it is not exposed to the host, so http://<ip>:80 doesn't work)
+docker run -d -p 8080:80 --name nginx2 nginx
+
+docker rm my-nginx1
+docker rm my-nginx2
+
+echo "Hello from Site 1" > site1/index.html
+echo "Hello from Site 2" > site2/index.html
+docker run -d -p 8081:80 --name my-nginx-site1 -v $(pwd)/site1/index.html:/usr/share/nginx/html/index.html nginx
+docker run -d -p 8082:80 --name my-nginx-site2 -v $(pwd)/site2/index.html:/usr/share/nginx/html/index.html nginx
+
+http://<ip>:8081
+http://<ip>:8082
+
+
+concept of ports
+----------------
+
+    Understanding Ports in a Linux Server (Layman's Terms)
+    Imagine your Linux server as a huge office building, 
+    where each office room represents a different service or application running on the server.
+
+    Ports: Think of ports as the room numbers in this building. Each room (port) is used for a specific purpose, just like in an office building where different rooms might be used for meetings, storage, or specific departments.
+
+    Communication: When someone wants to access a specific service (like a website or an email server), they need to know which room (port) to go to. For example, if you want to visit a website, you would go to the room (port) 80, which is commonly used for HTTP web traffic.
+
+    Unique Numbers: Ports are identified by unique numbers ranging from 0 to 65535. Common services use standard port numbers: web servers use port 80 (HTTP) or 443 (HTTPS), email servers might use ports like 25 (SMTP), etc.
+
+    Security: Just like certain rooms in a building might be locked or require special access, some ports might be closed or restricted to prevent unauthorized access. This helps keep the server secure.
+
+    Understanding Ports in Docker (Layman's Terms)
+    Now, let's bring Docker into the picture. Docker allows you to run multiple isolated applications (containers) on a single server. Think of Docker as a way to create multiple smaller office buildings (containers) inside your main office building (the server).
+
+    Containers: Each container is like a smaller office building that has its own rooms (ports). These containers can run independently, each with their own set of services.
+
+    Port Forwarding: To allow people from outside to access the rooms (ports) inside these smaller office buildings (containers), you need to set up a system that forwards requests from the main building's rooms (server's ports) to the appropriate rooms in the smaller buildings (containers). This is known as port forwarding or port mapping.
+
+    Example: If you have a container running a web server inside your Docker setup, it might be listening on port 80 inside the container. To access this web server from outside, you need to map a port on the main building (server) to this port in the container. For instance, you could map port 8080 on the main building to port 80 in the container. When someone accesses port 8080 on the main building, their request is forwarded to port 80 in the appropriate container.
+
+
+--------------------------------------------
+dockre pull sharathchandra04/sharathchandra04:sshservercat
+dockre pull sharathchandra04/sharathchandra04:sshserverdog
+docker run -d -p 2222:22 --name cat sharathchandra04/sharathchandra04:sshservercat
+docker run -d -p 2223:22 --name dog sharathchandra04/sharathchandra04:sshserverdog
+docker inspect cat  --> get Ipaddress
+docker inspect dog  --> get Ipaddress
+
+    connect to cat server and then connect to dog server from cat using ssh
+    docker exec -it cat bash
+        ssh dog@<ip-of-dog server>
+        touch dogfile.txt
+        exit
+    connect to server dog and verify if the file is created or not
+    docker exec -it dog bash
+        ls
+        exit
+    
+    dog --> cat
+    connect to dog server and then connect to cat server from cat using ssh
+    docker exec -it dog bash
+        ssh cat@<ip-of-cat server>
+        touch catfile.txt
+        exit
+    connect to server cat and verify if the file is created or not
+    docker exec -it cat bash
+        ls
+        exit
+
+
+
+docker stop $(docker ps -q)
+docker   rm $(docker ps -aq)
+docker run -it -d --name ubn ubuntu bash
+docker exec -it ubn bash
+    apt-get update
+    apt-get install -y curl
+    touch fileone.txt
+    touch filetwo.txt
+    exit
+docker ps
+docker commit <container_id> custom-ubuntu-image
+docker tag custom-ubuntu-image <username>/<reponame>:custom-ubuntu-image
+docker login
+    Log In to Docker Hub:
+docker push <username>/<reponame>:custom-ubuntu-image
+    
+    By tagging the image with my-dockerhub-username/my-ubuntu-image:latest, you indicate that:
+    The image belongs to the user my-dockerhub-username.
+    The image is stored in the repository named my-ubuntu-image.
+    The specific version of the image is labeled as latest.
+
+    a docker user can have multiple repositories
+    a repository is generally used to to multiple images of different versions
+    for eample nginx repository has many images, each image witha a different tag
+        nginx (repository)
+            latest (default)
+            v3.0.0
+            v2.0.0
+            v1.0.0
+    create a public repository, push image with a tag to it.
+    provide your repository name

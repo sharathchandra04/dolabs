@@ -106,3 +106,7 @@ def cleanstructure(copydir):
     remove_directories_from_home(directories_to_remove)
     directory_to_copy = copydir
     copy_structure_to_home(directory_to_copy)
+
+def filter_dicts(dict_list, filter_by):
+    return [d for d in dict_list if all(d.get(k) == v for k, v in filter_by.items())]
+

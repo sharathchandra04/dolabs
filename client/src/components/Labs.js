@@ -12,7 +12,7 @@ const DemoPaper = styled(Paper)(({ theme }) => ({
   fontWeight: 520
 }));
 
-function TaskUI({ setLabmode }) {
+function TaskUI({ setLabmode, labtype }) {
   const [labs, setLabs] = useState([
     {labid: 1, taskid: 1, tags:['linux']},
     {labid: 1, taskid: 2, tags:['linux']},
@@ -25,19 +25,22 @@ function TaskUI({ setLabmode }) {
     {labid: 4, taskid: 2, tags:['aws', 'ec2', 'sg']},
     {labid: 5, taskid: 1, tags:['docker']}
   ]);
-  const selectLab = (l, t) => {
-    console.log('1. ', l, t)
-    setLabmode(l, t)
+  const selectLab = (l, t, i) => {
+    if(labs[i].tags[0] === labtype){
+      setLabmode(l, t)
+    }else{
+      window.alert('please change correct lab type')
+    }
   }
   return (
     <div>
       <Grid container  spacing={1} style={{overflowY: "auto", padding: '25px', backgroundColor:'grey'}}>
         {labs.map((l, index) => {
           return <Grid item sm={2} spacing={1} style={{textAlign: 'right', cursor:'pointer'}} key={index}>
-            <DemoPaper variant="elevation" onClick={() => {selectLab(l.labid, l.taskid)}}>  
+            <DemoPaper variant="elevation" onClick={() => {selectLab(l.labid, l.taskid, index)}}>  
               <Grid container item  sm={12} spacing={1} style={{}}>
                 <Grid style={{textAlign: 'right', cursor:'pointer'}} item sm={6} spacing={1}>
-                    <DemoPaper variant="elevation" style={{backgroundColor:'lightblue'}} onClick={() => {selectLab(l.labid, l.taskid)}}>
+                    <DemoPaper variant="elevation" style={{backgroundColor:'lightblue'}} onClick={() => {selectLab(l.labid, l.taskid, index)}}>
                         <div>
                             <b>Lab &nbsp;  : &nbsp;  {l.labid}&nbsp;&nbsp;</b>
                         </div>

@@ -5,7 +5,7 @@
     "labid": 4,
     "taskid": 2,
     "title": "AWS EC2 basics",
-    "total": 5,
+    "total": 15,
     "subtasks": [
       {
         "staskid":1,
@@ -51,7 +51,7 @@
         "description": "check security group sgl4-2 is linked to EC2 instance ec2l4-3",
         "descriptionw": [],
         "specifications": [
-          {"key": "This should be lredy done while creating EC2, please verify if it is linked"}
+          {"key": "This should be lredy done while creating EC2, please verify if it is linked or you can add now"}
         ],
         "test": true,
         "status": 0
@@ -88,7 +88,7 @@
       },
       {
         "staskid": 5,
-        "title": "know EBS ?",
+        "title": "know EBS or Storage or Volume ?",
         "description": "learn about EBS associated with EC2, answer the questions",
         "descriptionw": [],
         "specifications": [
@@ -98,8 +98,8 @@
         "questions":[
             {
                 "qid": "4251",
-                "label": "EBS id",
-                "q": "what is the EBS id of ec2 instance ec2l4-3 ?",
+                "label": "Volume(EBS) id",
+                "q": "what is the (Volume)EBS id of ec2 instance ec2l4-3 ?",
                 "type": "text"        
             },
             {
@@ -119,15 +119,15 @@
             {"key": "Size", "value": "8 Gib"},            
             {"key":"IOPS", "value": "3000"},
             {"key":"Throughput", "value": "125"},
-            {"key":"AvailabilityZone", "value": "us-east-1"}
+            {"key":"AvailabilityZone", "value": "us-east-1f"}
         ],
         "test": false,
         "status": 0
       },
       {
         "staskid": 7,
-        "title": "link EBS to EC2 ",
-        "description": "link newly creted EBS volume to EC2 ec2l4-3",
+        "title": "link EBS to EC2 (this may mostly fail)",
+        "description": "link newly creted EBS volume in tak 6 to EC2 ec2l4-3",
         "descriptionw": [],
         "specifications": [],
         "questions":[
@@ -281,7 +281,7 @@
         "staskid": 14,
         "title": "learn EC2 connect",
         "description": "connect to the ec2 instance ec2l4-5 using SSHConnect and create a file called test.txt and then write few lines to it",
-        "connect": ["ec2five"],
+        "connect": ["ec2l4-5"],
         "commands": [
             {
                 "command": "sudo apt update",
@@ -322,7 +322,7 @@
       {
         "staskid": 16,
         "title": "snapshot to image",
-        "description": "1. create AMI snapshotami from snapshot",
+        "description": "1. create AMI snapshotami from snapshot created in task 15",
         "descriptionw": [],
         "specifications": [
             {"key":"name", "value": "snapshotami"}
@@ -346,7 +346,7 @@
         ],
         "questions":[
         ],
-        "test": false,
+        "test": true,
         "status": 0
       },
       {

@@ -28,7 +28,6 @@ def check_instances_presence(creds, instance_names):
                         inames.append(name) 
                         break
         r = True
-        print('inames, instance_names --> ', inames, instance_names)
         for instance_name in instance_names:
             if instance_name not in inames: r = False
         return r

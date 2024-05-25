@@ -14,7 +14,7 @@ labdict = {
     'lab2': 'linuxtasks2',
     'lab3': 'linuxtasks3',
     'lab4': 'awslab1',
-    'lab5': 'dockerlab1',
+    'lab5': 'dockerlab1'
 }
 
 @app.route('/check_task', methods=['POST'])
@@ -62,6 +62,26 @@ def check_task_aws():
         "file_exists_in_directory": ''
     })
 
+@app.route('/check_task_docker', methods=['POST'])
+def check_task_docker():
+    data = request.get_json()
+    print(data)
+    answers = data.get('qmap', {})
+    lab_id = data.get('lab_id')
+    task_id = data.get('task_id')
+    stask_id = data.get('stask_id')
+    function_name = f"l{lab_id}stask{stask_id}"
+    func = globals()[function_name]
+    a = func(answers)
+    print(a)
+    time.sleep(3)
+    return jsonify({
+        "lab_id": lab_id,
+        "task_id": task_id,
+        "stask_id": stask_id,
+        "results": a
+    })
+
 @app.route('/data/<lab_id>')
 def get_data(lab_id):
     d = labdict[f'lab{lab_id}']
@@ -103,6 +123,29 @@ def get_data1():
     jsonlist = sorted(jsonlist, key=lambda x: x['taskid'])
     return jsonify(jsonlist)
 
+@app.route('/getdockerlab', methods=['GET'])
+def getdockerlab():
+    lab_id = request.args.get('labid')
+    task_id = request.args.get('taskid')
+    stask_id = request.args.get('staskid')
+    # utils.cleanstructure(f"Lab{lab_id}Task{task_id}")
+    d = labdict[f'lab{lab_id}']
+    directory = f'../labs/{d}'    
+    files = os.listdir(directory)
+    files = [f"task{task_id}.json"]
+    json_files = [file for file in files if file.endswith('.json')]
+    jsonlist = []
+    print(json_files)
+    try:
+        for json_file in json_files:
+            file_path = os.path.join(directory, json_file)
+            with open(file_path, 'r') as f:
+                data = json.load(f)
+                jsonlist.append(data)
+    except FileNotFoundError:
+        return jsonify({'error': 'File not found'}), 404
+    jsonlist = sorted(jsonlist, key=lambda x: x['taskid'])
+    return jsonify(jsonlist)
 
 @app.route('/creds', methods=['POST'])
 def save_data():
@@ -122,7 +165,9 @@ def save_data():
             next(reader)
             for row in reader:
                 print(row, userid, access, secret)
-                if row == [userid, access, secret]:
+                if row[0] == userid and len(access)==0 and len(secret)==0:
+                    return jsonify({'message': 'Data already exists'}), 400
+                elif row == [userid, access, secret]:
                     return jsonify({'message': 'Data already exists'}), 400
     except Exception as e:
         print(e) 

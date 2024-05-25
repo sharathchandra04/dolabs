@@ -23,7 +23,7 @@ function App() {
   const [labid, setLabid] = useState(1);
   const [taskid, setTaskid] = useState(1);
   const [labmode, setLabmode] = useState(false);
-  const [labType, setLabType] = useState('aws');
+  const [labType, setLabType] = useState('docker');
   const [creds, setCreds] = useState({});
   const [ip, setIps] = useState(['localhost', '44.222.226.246']);
   const [ipi, setIpsi] = useState(0);
@@ -43,30 +43,10 @@ function App() {
     setLabType(lt.target.value)
   }
   const setcreds = (creds) => {
-    // setLabmode(false)
-    console.log('creds--> ', creds)
     setCreds(creds)
-  }
-  const kk = () => {
-    // document.getElementById('myframe').addEventListener('load', function() {
-    //   // var iframeContent = this.contentDocument || this.contentWindow.document;
-    //   // var portInput = iframeContent.getElementById('port');
-    //   // if (portInput) {
-    //   //     portInput.value = '48';
-    //   // }
-
-    // });
-    var iframeContent = document.getElementById('myframe').contentDocument || document.getElementById('myframe').contentWindow.document;
-    var portInput = iframeContent.getElementById('port');
-    if (portInput) {
-        portInput.value = '48';
-    }
-
   }
   return (
     <div className="App">
-      <Button onClick={()=> {if(ipi){setIpsi(0)}else{setIpsi(1)}}}>Button</Button>
-      <Button onClick={()=> { kk() }}>AutoFill</Button>
       {(labmode)&&(labType==='linux')&&(<Grid container spacing={0}>
             <Grid item xs={12} sm={5}>
               <div style={{ height: '100vh', backgroundColor: '#d4ddfa' }}>
@@ -78,7 +58,7 @@ function App() {
                 <iframe
                   id="myframe"
                   title="Your iFrame"
-                  src={`http://${ip[ipi]}:8888/?hostname=localhost&username=sharath&port=22&password=MDQxMDE5OThCaXQ=&command='ls'`}
+                  src={`http://localhost:8888/?hostname=sharath-Inspiron-15-3511&username=sharath&port=22&password=MDQxMDE5OThCaXQ=&command=./start.exp`}
                   width="100%"
                   height="100%"
                 ></iframe>
@@ -111,7 +91,7 @@ function App() {
             <iframe
               id="myframe"
               title="Your iFrame"
-              src="http://localhost:8888"
+              src="http://localhost:8888/?hostname=sharath-Inspiron-15-3511&username=sharath&port=22&password=MDQxMDE5OThCaXQ=&command=./start.exp"
               width="100%"
               height="100%"
             ></iframe>
@@ -143,7 +123,7 @@ function App() {
         </Grid>
       </div >
       )}
-      {(!labmode)&&(<Labs setLabmode={setlabandtask}/>)}
+      {(!labmode)&&(<Labs labtype={labType} setLabmode={setlabandtask}/>)}
     </div>
   );
 }
