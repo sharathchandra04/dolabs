@@ -210,7 +210,7 @@ def serve(path):
 
 if __name__ == '__main__':
     print('------------------------------------')
-    app.run(debug=True, host='0.0.0.0')
+    app.run(debug=True, host='0.0.0.0', port=5000)
 
 # clone project
 # ------------------------
@@ -237,3 +237,16 @@ if __name__ == '__main__':
 # start frontend
 # ------------------------
 # npm start 
+
+
+
+# git clone https://github.com/sharathchandra04/dolabs.git
+# sudo apt install python3-pip
+# sudo apt install python3-venv
+# python3 -m venv venv
+# source venv/bin/activate
+# cd dolabs/
+# cd server/
+# pip install -r requirements.txt 
+# sudo ufw allow 5000
+# python server.py
