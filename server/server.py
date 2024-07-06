@@ -86,6 +86,8 @@ def check_task_docker():
 
 @app.route('/data/<lab_id>')
 def get_data(lab_id):
+    files1 = os.listdir('..')
+    print(files1)
     d = labdict[f'lab{lab_id}']
     directory = f'../{d}'    
     files = os.listdir(directory)
@@ -104,6 +106,7 @@ def get_data(lab_id):
 
 @app.route('/data1', methods=['GET'])
 def get_data1():
+    files1 = os.listdir('..')
     lab_id = request.args.get('labid')
     task_id = request.args.get('taskid')
     utils.cleanstructure(f"Lab{lab_id}Task{task_id}")
@@ -206,6 +209,7 @@ def serve(path):
     return send_from_directory(app.static_folder, 'index.html')
 
 if __name__ == '__main__':
+    print('------------------------------------')
     app.run(debug=True, host='0.0.0.0')
 
 # clone project
