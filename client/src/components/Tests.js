@@ -98,7 +98,7 @@ function TaskUI({labid, taskid, gotoListMode}) {
   // }
   const loadLab = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/data1?labid=${labid}&taskid=${taskid}`);
+      const response = await axios.get(`/data1?labid=${labid}&taskid=${taskid}`);
       console.log(response.data)
       if(response.data.length) {
         const task = 0
@@ -150,7 +150,7 @@ function TaskUI({labid, taskid, gotoListMode}) {
       task_id: taskid
     };
     setBuffer(true)
-    axios.post('http://localhost:5000/check_task', data)
+    axios.post('/check_task', data)
       .then((response) => {
         setBuffer(false)
         console.log('Response:', response.data);

@@ -143,7 +143,7 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
       localStorage.setItem('userid', formData.field1)
       newformData.access = formData.field2 || '';
       newformData.secret = formData.field3 || '';
-      const response = await axios.post('http://localhost:5000/creds', newformData);
+      const response = await axios.post('/creds', newformData);
       console.log(response.data);
       setcreds(formData)
       handleClose();
@@ -158,7 +158,7 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
   };
   const loadLab = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/data1?labid=${labid}&taskid=${taskid}`);
+      const response = await axios.get(`/data1?labid=${labid}&taskid=${taskid}`);
       console.log(response.data)
       if(response.data.length) {
         const task = 0
@@ -194,7 +194,7 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
     };
     console.log('qMap --> ', qMap, data)
     setBuffer(true)
-    axios.post('http://localhost:5000/check_task_aws', data)
+    axios.post('/check_task_aws', data)
       .then((response) => {
         setBuffer(false)
         const results = response.data.results
@@ -219,7 +219,7 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
       creds: creds,
       insname: name
     };
-    axios.post('http://localhost:5000/connect', data)
+    axios.post('/connect', data)
     .then((response) => {
       console.log(response.data);
       if(response.data.id!=null){

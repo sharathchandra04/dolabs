@@ -100,7 +100,7 @@ function Dockercomp({labid, taskid, gotoListMode}) {
   };
   const loadLab = async () => {
     try {
-      const response = await axios.get(`http://localhost:5000/getdockerlab?labid=${labid}&taskid=${taskid}`);
+      const response = await axios.get(`/getdockerlab?labid=${labid}&taskid=${taskid}`);
       console.log(response.data)
       if(response.data.length) {
         const task = 0
@@ -143,7 +143,7 @@ function Dockercomp({labid, taskid, gotoListMode}) {
       stask_id: staskid,
       qmap: qMap
     };
-    axios.post('http://localhost:5000/check_task_docker', data)
+    axios.post('/check_task_docker', data)
       .then((response) => {
         const results = response.data.results
         setCurrtestid(null)
