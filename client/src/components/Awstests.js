@@ -113,11 +113,13 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
 
   const handleOpen = () => {
     const userid = localStorage.getItem('userid');
-    setFormData({
+    const fd = {
       field1: userid || '',
       field2: '',
-      field3: '',
-    })
+      field3: ''
+    }
+    setFormData(fd)
+    setcreds(fd)
     setOpen(true);
   };
   const handleClose = () => {setOpen(false);};
@@ -183,6 +185,7 @@ function Awstest({labid, taskid, gotoListMode, setcreds, creds, setQ}) {
   const Test = () => {
     const taskid = taskData.taskid
     const labid = taskData.labid
+    console.log('creds ---> ', creds)
     const data = {
       lab_id: labid,
       task_id: taskid,
@@ -725,9 +728,9 @@ function Awstesttabs({labid, taskid, gotoListMode, setcreds, creds}) {
       <TabContext value={value}>
         <Box>
           <TabList onChange={handleChange} aria-label="">
-            <Tab label="Item One" value="1" />
-            <Tab label="Item Two" value="2" />
-            <Tab label="Item Three" value="3" />
+            <Tab label="Tasks" value="1" />
+            <Tab label="Solutions" value="2" />
+            <Tab label="Blogs" value="3" />
           </TabList>
         </Box>
         <TabPanel value="1" style={{padding: '0px'}}>
@@ -755,25 +758,8 @@ function Awstesttabs({labid, taskid, gotoListMode, setcreds, creds}) {
                   <img src="" style={{}}/>
                 </CardContent>
               </Card>
-                // <div style={{width:'300px', height: '200px', overflow: 'hidden', position: 'relative'}}>
-                //   <img 
-                //     src="example.jpg"  
-                //     alt=""
-                //     style={{
-                //       width: '100%',
-                //       height: 'auto',
-                //       display: 'block',
-                //       position: 'absolute',
-                //       top: '50%',
-                //       left: '50%',
-                //       transform: 'translate(-50%, -50%)'
-                //     }} 
-                //   />
-                // </div>
             })
           }
-          {/* <PDFViewer url={'https://www.math.nagoya-u.ac.jp/~richard/teaching/s2022/Vic1.pdf'} /> */}
-          {/* https://www.math.nagoya-u.ac.jp/~richard/teaching/s2022/Vic1.pdf */}
         </TabPanel>
         <TabPanel value="3" style={{padding: '0px'}}>
           <ParentComponent questions={questions}/>

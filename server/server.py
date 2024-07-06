@@ -1,4 +1,4 @@
-from flask import Flask, jsonify, request
+from flask import Flask, jsonify, request, send_from_directory
 from flask_cors import CORS
 import json
 import os
@@ -7,8 +7,10 @@ from tests import *
 from utils import utils, awsutils
 import csv
 
-app = Flask(__name__)
+# app = Flask(__name__)
+app = Flask(__name__, static_folder='build', static_url_path='')
 CORS(app)
+
 labdict = {
     'lab1': 'linuxtasks1',
     'lab2': 'linuxtasks2',
@@ -192,9 +194,19 @@ def getinsid():
         return jsonify({'id': id }), 200
     except Exception as e:
         return jsonify({'id': id }), 200
-         
+
+# Serve React App
+@app.route('/', defaults={'path': ''})
+# @app.route('/<path:path>')
+def serve(path):
+    # if path != "" and path.exists(app.static_folder + '/' + path):
+    #     return send_from_directory(app.static_folder, path)
+    # else:
+    #     return send_from_directory(app.static_folder, 'index.html')
+    return send_from_directory(app.static_folder, 'index.html')
+
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, host='0.0.0.0')
 
 # clone project
 # ------------------------
